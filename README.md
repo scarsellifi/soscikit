@@ -1,8 +1,8 @@
 # SoSciKit
 ## Social Science Kit - Open Source Software for Social Science
 
-SoSciKit is a web application for simplified data analysis based on scientific libraries Flask and Python.
-The web application allows to use the python libraries through a graphical interface even to those who do not know the programming language python. At the moment the application allows to perform monovariate, bivariate, cross tabulation and k-mean classification operations. In addition, it allows to recode categorical variables and create typologies.
+SoSciKit is a web application for simplified data analysis based on Python scientific libraries and Flask.
+The web application allows to use the python libraries through a graphical interface even to those who do not know programming language. At the moment the application allows to perform monovariate, bivariate, cross tabulation and k-mean classification operations. In addition, it allows to recode categorical variables and create typologies.
 
 [![Downloads](https://pepy.tech/badge/soscikit)](https://pepy.tech/project/soscikit)
 [![Downloads](https://pepy.tech/badge/soscikit/week)](https://pepy.tech/project/soscikit/week)
