@@ -1,0 +1,129 @@
+<title>Carica o utilizza file già presente in memoria</title>
+
+<style>
+</style>
+
+
+<head>
+
+</head>
+
+{% extends "layout.html" %}
+<html>
+{% block content %}
+<head>
+  <!-- Import Vega 5 & Vega-Lite 3 (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3"></script>
+  <!-- Import vega-embed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@4"></script>
+    <!-- Sortable.js -->
+  <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+
+
+    <p>Selected variable: {{ operation_form }}</p>
+
+    <p> frequency table </p>
+    {{ data | safe }}
+    <h3> characteristic values </h3>
+    {%  for key, value in characteristic_values.items() %}
+    <p> {{ key }} {{ value }} </p>
+
+    {% endfor %}
+    <p> Plot </p>
+    <div id="vis"></div>
+
+
+
+{% if  options_tipo_var == "categoriale" %}
+
+
+
+    <p> Change the order of category and then press button</p>
+    <ul id="unique_values_sortable">
+    {% for values in unique_values %}
+        <li class="ordered_values">{{ values }}</li>
+    {% endfor %}
+    </ul>
+    <form action = "{{url_for('monovariate_plot_sorted')}}" method = "POST", enctype="multipart/form-data" accept-charset="UTF-8">
+    <input name="items" id="to_send" value="" />
+    </form>
+
+    <button type="submit" onclick="post_order()" class="btn btn-primary" />set the new order in plot</button>
+
+    <div id="newplot">
+
+    </div>
+{% endif  %}
+
+
+</body>
+<script type="text/javascript">
+var source = {{ chart_json  | safe}};
+  vegaEmbed('#vis', source).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+    /*
+    var spec = "https://raw.githubusercontent.com/vega/vega/master/docs/examples/bar-chart.vg.json";
+  vegaEmbed('#vis', spec).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+*/
+
+    document.addEventListener('DOMContentLoaded', function() {
+   Sortable.create(unique_values_sortable, {
+  group: 'unique_values_sortable',
+  animation: 100
+});
+}, false);
+</script>
+<script>
+var post_order = function() {
+    var lis = document.getElementById("unique_values_sortable").getElementsByTagName("li");
+    var myorder = [];
+    for (i = 0; i < lis.length; ++i) {
+        myorder.push(lis[i].textContent);
+
+    }
+    console.log(myorder);
+    // Make a request for a user with a given ID
+
+
+    let payload = {
+      cagory_order: myorder
+    };
+
+    axios({
+      url: "{{url_for('set_monovariate_plot_sorted')}}",
+      method: 'post',
+      data: payload
+    })
+    .then(function (response) {
+        // your action after success
+        console.log(response);
+    }).then(function(result) {
+       window.location.href = "{{ url_for('monovariate_plot_sorted') }}";
+      }).catch(function (error) {
+       // your action on error success
+        console.log(error);
+    });}
+
+</script>
+
+
+
+</html>
+
+{% endblock %}
+
+
+
+
+
+

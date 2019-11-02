@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<head>
+  <!-- Import Vega 5 & Vega-Lite 3 (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3"></script>
+  <!-- Import vega-embed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@4"></script>
+  <script src="{{url_for('static', filename='css/dragtable.js') }}" ></script>
+</head>
+
+<body>
+
+
+
+    <p></p>
+    {{ table | safe }}
+    <p> Crosstab output </p>
+    {{ data | safe }}
+
+    <p> Plot </p>
+    <div id="vis"></div>
+
+
+    <p> Unique value for sorting ordinal values</p>
+    {{ unique_values | safe }}
+
+
+    {% if abilitate_tipology == "abilitate" %}
+
+        <button id="classification">Tipological classification </button>
+
+    {% else %}
+
+        <button id="classification" disabled>Tipological classification </button>
+
+    {% endif %}
+
+    <script>
+        document.getElementById("classification").onclick = function () {
+        location.href = "{{ url_for('ncrosstab_classification' ) }}";
+            };
+
+
+    </script>
+
+{% endblock %}
+
+
+
+
+
+

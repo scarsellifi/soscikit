@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<head>
+  <!-- Import Vega 5 & Vega-Lite 3 (does not have to be from CDN) -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="{{url_for('static', filename='css/dragtable.js') }}" ></script>
+</head>
+
+<body>
+
+
+
+    <p>result: </p>
+    {{ table | safe }}
+    <p> frequency table </p>
+    {{ data | safe }}
+
+
+
+    <button onclick="post_order()">Tipological classification </button>
+
+    <input id="categ_1" onclick="set_color(this)" onfocusout="set_value(this)" style="background-color:RED" placeholder="RED">
+    <input id="categ_2" onclick="set_color(this)" onfocusout="set_value(this)" style="background-color:GREEN" placeholder="GREEN">
+    <input id="categ_3" onclick="set_color(this)" onfocusout="set_value(this)"  style="background-color:YELLOW"  placeholder="YELLOW">
+    <input id="categ_4" onclick="set_color(this)" onfocusout="set_value(this)" style="background-color:ORANGE"  placeholder="ORANGE"> <br>
+    <input id="categ_5" onclick="set_color(this)" onfocusout="set_value(this)" style="background-color:CYAN" placeholder="CYAN">
+    <input id="categ_6" onclick="set_color(this)" onfocusout="set_value(this)" style="background-color:BROWN" placeholder="BROW">
+    <input id="categ_7" onclick="set_color(this)" onfocusout="set_value(this)"  style="background-color:MAGENTA"  placeholder="MAGENTA">
+    <input id="categ_8" onclick="set_color(this)" onfocusout="set_value(this)" style="background-color:PURPLE"  placeholder="PURPLE">
+
+
+
+    <script>
+
+
+var selected_color = "";
+    var selected_label = "";
+    var table = document.getElementById("corr_tab");
+
+    const cells = table.querySelectorAll('td');
+            cells.forEach(function(cell) {
+              cell.setAttribute('onclick','color_cell(this);');});
+
+    function color_cell(elem) {
+            elem.style.backgroundColor = selected_color;
+            elem.setAttribute("label_classification", selected_label);
+        }
+
+    function set_color(input_area) {
+                selected_color = input_area.style.backgroundColor;
+                selected_label = input_area.value;
+    }
+
+    function set_value(input_area) {
+                selected_label = input_area.value;
+
+    }
+    var multindex = [];
+    var dataframe = [];
+
+
+
+    var analize_obj = {
+        varx : "",
+        vary : "",
+        dataframe: []};
+
+    function analize_tab() {
+
+        analize_obj.vary = table.rows[0].cells[0].innerText;
+        analize_obj.varx = table.rows[1].cells[0].innerText;
+
+
+
+        for (var i = 2, row; row = table.rows[i]; i++) {
+            for (var j = 1, col; col = row.cells[j]; j++) {
+                analize_obj.dataframe.push({
+
+                    cordx: i,
+                    categoryx: row.cells[0].innerText,
+                    cordy: j,
+                    categoryy: table.rows[0].cells[j].innerText,
+                    value: col.getAttribute("label_classification"),
+                    color: col.style.backgroundColor
+                });
+
+            }
+        }
+        return analize_obj;
+    }
+    /*
+     function analize_tab() {
+
+
+
+        for (var i = 0, row; row = table.rows[i]; i++) {
+       //iterate through rows
+       //rows would be accessed using the "row" variable assigned in the for loop
+
+
+           for (var j = 0, col; col = row.cells[j]; j++) {
+             //iterate through columns
+             //columns would be accessed using the "col" variable assigned in the for loop
+              if(col.innerHTML === ""){
+                  multindex.push([i,j]);
+              }
+
+               dataframe.push([i,j, col.getAttribute("label_classification"),col.style.backgroundColor ]);
+
+
+           }
+
+
+        }
+        console.log(multindex);
+        return dataframe;
+        };
+        */
+
+    function post_order(){
+
+    // Make a request for a user with a given ID
+
+    let dataframe_l = analize_tab()
+    let payload = {
+      category_order: dataframe_l
+    };
+
+    axios({
+      url: "{{url_for('post_arrive')}}",
+      method: 'post',
+      data: payload
+    })
+    .then(response => {
+	console.log(response);
+	window.location = "{{ url_for('ncrosstab_classification_output') }}";
+    })
+    .catch(error => {
+        console.log(error.response)
+    });
+    }
+
+    </script>
+{% endblock %}
+
+
+
+
+
+

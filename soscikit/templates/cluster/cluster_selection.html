@@ -1,0 +1,223 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+
+
+<style type="text/css">
+    #lstBox1, #output_option, #calcolo{
+  height:350px;
+  width:800px;
+
+}
+    #lstBox2, #output_option, #calcolo{
+  height:350px;
+  width:400px;
+
+}
+
+
+.box{
+    margin-right: 30px;
+  margin-left: 30px;
+}
+
+.set_input{
+    display:flex;
+    justify-content:center;
+    border-style: solid;
+}
+
+.transferBtns {
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.transferBtns{
+  float:left;
+  align-self:center;
+}
+
+.set_output{
+  justify-content:center;
+    border-style: solid;
+    width: auto;
+    height: auto;}
+
+.textarea{
+    width: 300px;
+  height: 150px;
+    margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+input {float:left;}
+
+#nome_completo_variabile {
+    clear: both;
+}
+
+
+
+
+
+
+</style>
+
+
+<script>
+function showcontent(elem) {
+        //var popup = document.getElementById("myPopup");
+        //popup.classList.toggle("show")
+        console.log(elem.value);
+        $("#nome_completo_variabile").text(elem.value);
+    }
+</script>
+
+
+
+<h1> n K-means </h1>
+<div class="set_input">
+
+
+    <div class="box">
+    <b>variabili disponibili</b><br/>
+
+               <select multiple="multiple" id='lstBox1', name="bivariate_x">
+               {% for variable in variable_name_type %}
+                    <option onclick="save_on_x(this)" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+               {% endfor %}
+
+            </select>
+
+
+
+    <!--
+        <h2> variabile type </h2>
+        <input type="radio" name="var_type" value="categoriale" checked> categorical <br>
+        <input type="radio" name="var_type" value="cardinale"> cardinal <br>
+    <input type="radio" name="var_type" value="ordinale"> ordinal <br>
+
+    <h2> for ordinal variable set order</h2>
+    <p> list example: "one","two","three </p>
+    <input type="text" name="ordinal_list" size="200">
+    -->
+    </div>
+
+
+
+
+</div>
+<div class="set_output">
+<p> nome variabile completo (allo scorrimento del mouse) </p>
+        <p id="nome_completo_variabile"> </p>
+</div>
+    <br/>
+
+
+    <div>
+    <h3> selected variable:</h3>
+    <ul id="select_index">
+
+    </ul>
+    </div>
+
+
+    <div>
+    <h3> select number of class</h3>
+    <select id="cluster_class">
+    <option name="number_of_class" value = 1>1</option>
+        <option name="number_of_class" value = 2>2</option>
+        <option name="number_of_class" value = 3>3</option>
+        <option name="number_of_class" value = 4>4</option>
+        <option name="number_of_class" value = 5>5</option>
+        <option name="number_of_class" value = 6>6</option>
+        <option name="number_of_class" value = 7>7</option>
+        <option name="number_of_class" value = 8>8</option>
+        <option name="number_of_class" value = 19>9</option>
+    </select>
+    </div>
+
+
+    <div>
+    <button onclick="create_script()"> generate python script for kmean cluster</button>
+
+    </div>
+
+
+
+    <div>
+        <form action = "{{ url_for('cluster_output')}}" method = "POST", enctype="multipart/form-data" accept-charset="UTF-8">
+
+
+        <h3>Code for python execution</h3>
+        <textarea rows="4" columns = "200" class = "textarea" name="textarea_script" id="textarea_script"></textarea>
+    </div>
+
+
+    <h3>New variabile name</h3><br>
+    <input name="new_var_name" required><br>
+
+    <!-- inactive for now -->
+
+    <p>save variable: work in progress inactive for now </p>
+    <select id="save_variable">
+        <option value ="save_yes">yes</option>
+        <option value ="save_no">no</option>
+    </select>
+
+    <input type="submit">
+
+
+
+    </form>
+
+<script>
+function save_on_x(elem) {
+    var node = document.createElement("LI");
+    node.setAttribute("onclick", "autoremove(this)");
+    node.setAttribute("id", "elem.value");
+    var textnode = document.createTextNode("'" +  elem.value + "'");
+    node.appendChild(textnode);
+    document.getElementById("select_index").appendChild(node);
+
+}
+
+
+function autoremove(elem) {
+    elem.parentNode.removeChild(elem);
+
+}
+
+function create_script(){
+
+    var index = document.getElementById("select_index").getElementsByTagName("li");
+    var str = ","
+    var str_index = []
+    for (i = 0; i < index.length; ++i) {
+        str_index.push(index[i].textContent);
+
+    }
+
+    var index_concat = str.concat(str_index).substr(1);
+    var e = document.getElementById("cluster_class");
+    var number_of_class = e.options[e.selectedIndex].value;
+
+    var result = `[[${index_concat}], ${number_of_class}]` ;
+
+    document.getElementById("textarea_script").value = result;
+
+}
+
+</script>
+
+
+</body>
+{% endblock %}
+
+
+

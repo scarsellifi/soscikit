@@ -1,0 +1,242 @@
+{% extends "layout.html" %}
+
+<head>
+
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+
+    <style type="text/css">
+    #lstBox1, #output_option, #calcolo{
+  height:350px;
+  width:400px;
+
+}
+    #lstBox2, #output_option, #calcolo{
+  height:350px;
+  width:400px;
+
+}
+        #lstBox3, #output_option, #calcolo{
+  height:350px;
+  width:400px;
+
+}
+
+
+.box{
+    margin-right: 30px;
+  margin-left: 30px;
+}
+
+.set_input{
+    display:flex;
+    justify-content:center;
+    border-style: solid;
+}
+
+.transferBtns {
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.transferBtns{
+  float:left;
+  align-self:center;
+}
+
+.set_output{
+  justify-content:center;
+    border-style: solid;
+    width: auto;
+    height: auto;}
+
+.textarea{
+    width: 300px;
+  height: 150px;
+    margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+input {float:left;}
+
+#nome_completo_variabile {
+    clear: both;
+}
+
+
+
+
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+<script>
+function showcontent(elem) {
+        //var popup = document.getElementById("myPopup");
+        //popup.classList.toggle("show")
+        console.log(elem.value);
+        $("#nome_completo_variabile").text(elem.value);
+    }
+</script>
+
+<h1> bivariate selection </h1>
+<div class="set_input">
+
+ <form action = "{{url_for('bivariate_plot')}}" method = "POST", id="form", enctype="multipart/form-data" accept-charset="UTF-8">
+    <div class="box">
+    <b>variabili disponibili X e Y</b><br/>
+
+               <select multiple="multiple" id='lstBox1', name="bivariate_x">
+               {% for variable in variable_name_type %}
+                    <option onclick="save_on(this, 'select_index')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+               {% endfor %}
+
+            </select>
+
+
+        <select multiple="multiple" id='lstBox2', name="bivariate_y">
+               {% for variable in variable_name_type %}
+                    <option onclick="save_on(this, 'select_columns')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+               {% endfor %}
+
+            </select>
+
+
+        <select multiple="multiple" id='lstBox3', name="bivariate_hue">
+            {% for variable in variable_name_type_obj %}
+                <option onclick="save_on(this, 'select_hue')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type_obj[ variable ]}} </option>
+            {% endfor %}
+         </select>
+    <!--
+        <h2> variabile type </h2>
+        <input type="radio" name="var_type" value="categoriale" checked> categorical <br>
+        <input type="radio" name="var_type" value="cardinale"> cardinal <br>
+    <input type="radio" name="var_type" value="ordinale"> ordinal <br>
+
+    <h2> for ordinal variable set order</h2>
+    <p> list example: "one","two","three </p>
+    <input type="text" name="ordinal_list" size="200">
+    -->
+    </div>
+
+
+
+
+</div>
+<div class="set_output">
+<p> nome variabile completo (allo scorrimento del mouse) </p>
+        <p id="nome_completo_variabile"> </p>
+</div>
+    <br/>
+
+<div>
+    <button type="button" onclick="create_script()"> generate python script for bivariate </button>
+
+    </div>
+
+    <div >
+    <p> index on variable:</p>
+    <ul id="select_index">
+
+    </ul>
+    </div>
+    <div >
+    <p> columns on variable </p>
+    <ul id="select_columns">
+
+    </ul>
+    </div>
+    <div >
+    <p> hue on variable </p>
+    <ul id="select_hue">
+
+    </ul>
+    </div>
+
+
+    <div>
+
+    <textarea rows="4" columns = "200" class = "textarea" name="textarea_script" id="textarea_script" ></textarea>
+            </div>
+
+    </div>
+    <input type="submit">
+    </form>
+
+    <script>
+function save_on(elem, index) {
+    var node = document.createElement("LI");
+    node.setAttribute("onclick", "autoremove(this)");
+    node.setAttribute("id", "elem.value");
+    var textnode = document.createTextNode("'" +  elem.value + "'");
+    node.appendChild(textnode);
+
+    var index_element = document.getElementById(index);
+
+    if (index_element.childElementCount < 1) {
+    index_element.appendChild(node);
+    } else {
+        index_element.removeChild(index_element.childNodes[1]);
+    }
+
+}
+
+
+function autoremove(elem) {
+    elem.parentNode.removeChild(elem);
+
+}
+
+function create_script(){
+
+    var index = document.getElementById("select_index").getElementsByTagName("li");
+    var columns = document.getElementById("select_columns").getElementsByTagName("li");
+    var hue = document.getElementById("select_hue").getElementsByTagName("li");
+    var str = ","
+    var str_index = []
+    for (i = 0; i < index.length; ++i) {
+        str_index.push(index[i].textContent);
+
+    }
+    var str_columns = []
+    for (i = 0; i < columns.length; ++i) {
+        str_columns.push(columns[i].textContent);
+
+    }
+
+    var str_hue = []
+    for (i = 0; i < hue.length; ++i) {
+        str_hue.push(hue[i].textContent);
+
+    }
+
+    var index_concat = str.concat(str_index).substr(1);
+    var columns_concat  = str.concat(str_columns).substr(1);
+    var hue_concat  = str.concat(str_hue).substr(1);
+    if (hue_concat == ""){
+    var result = `sns.jointplot(x=${index_concat}, y=${columns_concat}, data=data, kind="reg")`;
+    } else {
+        result = `sns.lmplot(x=${index_concat}, y=${columns_concat}, data=data, hue=${hue_concat} )`
+    }
+
+    document.getElementById("textarea_script").value = result;
+
+
+
+}
+
+</script>
+
+
+
+
+{% endblock %}
+
+
+

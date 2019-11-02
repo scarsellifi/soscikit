@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    <!-- Import Vega 5 & Vega-Lite 3 (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3"></script>
+  <!-- Import vega-embed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@4"></script>
+
+
+
+{% endblock %}
+
+{% block content %}
+
+
+    <p>Selected variable: {{ operation_form }}</p>
+
+    <p> frequency table </p>
+    {{ data | safe }}
+
+    <p> Plot </p>
+    <div id="vis"></div>
+
+
+    <p> Unique value for sorting ordinal values</p>
+    {{ unique_values | safe }}
+
+    <h3> static plot with regression</h3>
+    <img src="{{ img_link }}">
+
+    <h3> Correlation </h3>
+    {{ correlation | safe }}
+
+</body>
+<script type="text/javascript">
+var source = {{ chart_json  | safe}};
+  vegaEmbed('#vis', source).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+    /*
+    var spec = "https://raw.githubusercontent.com/vega/vega/master/docs/examples/bar-chart.vg.json";
+  vegaEmbed('#vis', spec).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+*/
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+

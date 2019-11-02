@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+
+#lstBox1, #output_option, #calcolo{
+  height:350px;
+  width:800px;
+
+}
+
+
+.box{
+    margin-right: 10%;
+  margin-left: 10%;
+}
+
+.set_input{
+    display:flex;
+    justify-content:center;
+    border-style: solid;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.transferBtns {
+    margin-right: 10%;
+  margin-left: 10%;
+}
+
+.transferBtns{
+  float:left;
+  align-self:center;
+}
+
+.set_output{
+  justify-content:center;
+    border-style: solid;
+    width: auto;
+    height: auto;
+    margin-right: 10%;
+    margin-left: 10%;}
+
+.textarea{
+    width: 300px;
+  height: 150px;
+
+    margin-right: 10%;
+  margin-left: 10%;
+
+}
+
+
+input {float:left;}
+
+#nome_completo_variabile {
+    clear: both;
+}
+
+
+
+
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+<script>
+function showcontent(elem) {
+        //var popup = document.getElementById("myPopup");
+        //popup.classList.toggle("show")
+        console.log(elem.value);
+        $("#nome_completo_variabile").text(elem.value);
+    }
+</script>
+
+<h1> recode </h1>
+<div class="set_input">
+
+ <form action = "{{url_for('recode_operation')}}" method = "POST", enctype="multipart/form-data" accept-charset="UTF-8">
+    <div class="box">
+    <b>variabili disponibili</b><br/>
+               <select multiple="multiple" id='lstBox1', name="recode_var">
+               {% for variable in variable_name_type %}
+                    <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+               {% endfor %}
+
+            </select>
+        <!--
+        <h2> variabile type </h2>
+        <input type="radio" name="var_type" value="categoriale" checked> categorical and ordinal <br>
+        <input type="radio" name="var_type" value="cardinale"> cardinal <br>
+
+    <h2> drop missing </h2>
+        <input type="radio" name="drop_missing" value="drop" > drop missing <br>
+        <input type="radio" name="drop_missing" value="no_drop" checked> maintain missing<br>
+        -->
+    </div>
+    <input type="submit">
+
+
+
+    </form>
+</div>
+<div class="set_output">
+<p> nome variabile completo (allo scorrimento del mouse) </p>
+        <p id="nome_completo_variabile"> </p>
+</div>
+    <br/>
+
+{% endblock %}
+
+
+

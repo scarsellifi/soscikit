@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
+    <style>
+
+    div.dataTables_wrapper {
+        width: auto;
+        margin: auto;
+    }
+
+    </style>
+{% endblock %}
+{% block content %}
+    <h2>create subset</h2>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+
+            <form action = "{{url_for('create_subset')}}" method = "POST">
+
+
+                <p> variable selection  </p><br>
+
+                <p> New filename</p>
+                <input name="new_filename" required>
+                <p><button type="button" id="button" >deselect all </button> </p>
+
+                {% for variabile in columns %}
+                    <p> <input type="checkbox" class="Checkboxes" name="{{ variabile }}" value="{{ variabile }}" checked>{{ variabile }} - datatype {{ columns[variabile] }} </p>
+                {% endfor %}
+
+                <input type="submit" id="send_data" disabled>
+                </form>
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+    <script>
+    $(document).ready( function () {
+    $('#head_data').DataTable(
+        {"scrollY": true,
+        "scrollX": true}
+    );
+    } );
+    </script>
+
+    <script>
+
+    $('#button').click(function(e) {
+    $('.Checkboxes').each(function(i,item){
+        $(item).prop('checked', false);
+    });});
+
+    $('.Checkboxes').click(function(e) {
+    var x = 0;
+        $('.Checkboxes').each(function(i,item){
+        if ($(item).is(':checked')){
+            x = x +1;
+        }});
+
+        if (x >= 2){
+            $("#send_data").attr("disabled", false);
+        }
+        else
+        {
+            $("#send_data").attr("disabled", true);
+            alert("need minimum 2 variables");
+            }
+
+
+    });
+
+
+    </script>
+
+
+
+{% endblock %}
+
+
+
+
+
+

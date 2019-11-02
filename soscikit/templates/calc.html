@@ -1,0 +1,262 @@
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+
+    div.dataTables_wrapper {
+        width: auto;
+        margin: auto;
+    }
+
+
+    </style>
+{% endblock %}
+{% block content %}
+
+
+<!--
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+
+    <meta charset="UTF-8">
+
+-->
+<style type="text/css">
+    #lstBox1, #output_option, #calcolo{
+  height:350px;
+  width:200px;
+
+}
+
+
+.box{
+    margin-right: 30px;
+  margin-left: 30px;
+}
+
+.set_input{
+    display:flex;
+    justify-content:center;
+    border-style: solid;
+}
+
+.transferBtns {
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.transferBtns{
+  float:left;
+  align-self:center;
+}
+
+.set_output{
+  justify-content:center;
+    border-style: solid;
+    width: auto;
+    height: auto;}
+
+.textarea{
+    width: 300px;
+  height: 150px;
+    margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+input {float:left;}
+
+#nome_completo_variabile {
+    clear: both;
+}
+
+
+
+
+
+
+</style>
+
+
+<script>
+function showcontent(elem) {
+        //var popup = document.getElementById("myPopup");
+        //popup.classList.toggle("show")
+        console.log(elem.value);
+        $("#nome_completo_variabile").text(elem.value);
+    }
+</script>
+
+
+<div class="set_input">
+
+
+    <div class="box">
+    <b>Variables</b><br/>
+               <select multiple="multiple" id='lstBox1'>
+               {% for variable in variable_name_type %}
+                    <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+               {% endfor %}
+                  <!--
+                   onmouseenter="mouselog(event)" onmouseleave="mouselog(event)"
+                  <option value="ajax">Ajax</option>
+                  <option value="jquery">jQuery</option>
+                  <option value="javascript">JavaScript</option>
+                  <option value="mootool">MooTools</option>
+                  <option value="prototype">Prototype</option>
+                  <option value="dojo">Dojo</option>
+                  -->
+            </select>
+    </div>
+
+
+
+    <div class="box">
+    <b>Operation </b><br/>
+               <select multiple="multiple" id='output_option'>
+                  <option value="+">+</option>
+                  <option value="-">-</option>
+                  <option value="/">/</option>
+                  <option value="*">*</option>
+                  <option value="**">**</option>
+                   <option value="(">(</option>
+                   <option value=")">)</option>
+                   <option value="==">==</option>
+                   <option value=">=">>=</option>
+                   <option value="<="><=</option>
+                   <option value=">">></option>
+                   <option value="<"><</option>
+                   <option value="|">|</option>
+                   <option value="&">&</option>
+
+            </select>
+    </div>
+
+    <div class="box">
+    <b>costant</b><br/>
+        <input id="costante">
+    </div>
+
+
+    <div class="transferBtns">
+      <input type='button' id='btnRight' value ='  >  '/>
+      <br/><input type='button' id='btnLeft' value ='  <  '/>
+      <div class="submitContainer">
+      <input type="submit" id="generate_code", value="carica"/>
+      </div>
+    </div>
+
+
+
+
+    <div class="box">
+            <b>Calcolo </b><br/>
+            <select multiple="multiple" id='calcolo'>
+            </select>
+    </div>
+
+    <br/>
+
+
+
+    </div>
+
+
+    <div class="set_output">
+        <p> var name (on mouse over </p>
+        <p id="nome_completo_variabile"> </p>
+        <form action = "{{url_for('calc_output')}}" method = "POST">
+        <p>python code</p>
+        <div class="box">
+            <b>New variable name</b> <br/>
+            <input id="nuova_variabile" name="new_variabile">
+        </div>
+            <p>dataset</p>
+            <div>
+            <textarea rows="1" columns = "100" id="dataset" class = "textarea" name="dataset">{{ dataset }}</textarea>
+            <p>formula</p>
+            <textarea rows="4" columns = "200" id="cell" class = "textarea" name="formula"></textarea>
+            </div>
+        <input type="submit", value="esegui operazione">
+
+        </form>
+    </div>
+
+
+
+</body>
+
+
+
+
+<script>
+    $(document).ready(function() {
+    $('#btnRight').click(function(e) {
+        var selectedOpts = $('#lstBox1 option:selected');
+        var selectedOpts1 = $('#output_option option:selected');
+        var costant = $("#costante").val();
+        console.log(costant.length)
+        if (selectedOpts.length == 0 && selectedOpts1.length == 0 && costant.length == 0) {
+            alert("Nothing to move.");
+            e.preventDefault();
+        }
+        if (selectedOpts.length != 0 && costant.length == 0)
+        {
+            //$('#lstBox2').append($(selectedOpts).clone());
+            var insert_data = 'data[u"' + String($("#lstBox1").val()[0]) + '"]'
+            $('#calcolo').append(new Option(insert_data, insert_data, true, true));
+
+            e.preventDefault();
+
+
+        } else if (selectedOpts1.length != 0 && costant.length == 0) {
+            //$('#lstBox2').append($(selectedOpts1).clone());
+
+            var insert_data = String($("#output_option").val()[0])
+            $('#calcolo').append(new Option(insert_data, insert_data, true, true));
+
+            e.preventDefault();
+
+        } else if (costant.length > 0) {
+
+            $('#calcolo').append(new Option(costant, costant, true, true));
+            e.preventDefault();
+
+        }
+        $("#lstBox1").val([]);
+        $("#output_option").val([]);
+        $("#costante").val([]);
+
+    });
+
+
+    $('#btnLeft').click(function(e) {
+        var selectedOpts = $('#calcolo option:selected');
+        if (selectedOpts.length == 0) {
+            alert("Nothing to move.");
+            e.preventDefault();
+        }
+
+        $(selectedOpts).remove();
+        e.preventDefault();
+    });
+
+
+    $('#generate_code').click(function(e) {
+        console.log($("#calcolo").text());
+        $("#cell").val( $("#calcolo").text().replace(/\r?\n/g, ''));
+    });
+
+
+
+
+
+});
+
+
+
+</script>
+{% endblock %}

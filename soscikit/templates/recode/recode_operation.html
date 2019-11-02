@@ -1,0 +1,63 @@
+<title>Carica o utilizza file già presente in memoria</title>
+
+<style>
+</style>
+
+
+<head>
+
+</head>
+
+{% extends "layout.html" %}
+<html>
+{% block content %}
+<head>
+  <!-- Import Vega 5 & Vega-Lite 3 (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3"></script>
+  <!-- Import vega-embed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@4"></script>
+    <!-- Sortable.js -->
+  <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+
+
+    <p>Selected variable: {{ operation_form }}</p>
+
+    <p> frequency table </p>
+    {{ data | safe }}
+    <form action = "{{url_for('recode_output')}}" method = "POST">
+        <h2> set the new values in the input box</h2>
+        <input name="new_variabile_name" required>
+
+        <p>Set the value in the input field or leave it unchanged</p>
+
+    {% for value in unique_values %}
+        <p>{{value}}: <input name="{{ value }}" placeholder="{{ value }}" value = {{ value }}></p>
+    {% endfor %}
+
+    <input type = "submit" value="recode values">
+    </form>
+
+
+
+
+
+</body>
+
+
+
+
+</html>
+
+{% endblock %}
+
+
+
+
+
+

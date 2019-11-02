@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<head>
+  <!-- Import Vega 5 & Vega-Lite 3 (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3"></script>
+  <!-- Import vega-embed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@4"></script>
+  <script src="{{url_for('static', filename='css/dragtable.js') }}" ></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<style>
+  div.dataTables_wrapper {
+        width: auto;
+        margin: 0 auto;
+    }
+
+
+
+</style>
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="row">
+
+            <div class="col-sm-6">
+
+    <p></p>
+    {{ table | safe }}
+    <p> Crosstab output </p>
+    {{ data | safe }}
+
+            </div>
+             <div class="col-sm-6">
+
+    <p> Plot </p>
+    <div id="vis"></div>
+
+    <img src="{{ img_link }}">
+            </div>
+    <p> Unique value for sorting ordinal values</p>
+    {{ unique_values | safe }}
+    </div>
+
+    <button id="classification">Tipological classification </button>
+
+    <script>
+        document.getElementById("classification").onclick = function () {
+        location.href = "{{ url_for('ncrosstab_classification' ) }}";
+            };
+
+
+
+
+    $(document).ready( function () {
+    $('#result_data').DataTable(
+        {"scrollY": true,
+        "scrollX": true}
+    );
+    } );
+
+
+
+    </script>
+
+
+
+{% endblock %}
+
+
+
+
+
+

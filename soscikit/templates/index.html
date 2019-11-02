@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+
+    <style>
+    #action_nav {
+    display: none;
+    }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+
+    {{ super() }}
+
+
+    <h1> SoSciKit</h1>
+    <h3> Social Science Kit - Open Source Software for Social Science</h3>
+    <h2>select file to use</h2>
+
+    <form action = "{{url_for('load')}}" method = "POST">
+        <select name="load">
+        {% for file in files %}
+            <option value= "{{file}}" name="load" >{{ file }}</option>
+        {% endfor %}
+        </select>
+
+          <p> which type of file? </p>
+          <input type="radio" name="file_config" value="standard_excel" checked> standard excel<br>
+          <input type="radio" name="file_config" value="excel_google_form" > excel google form<br>
+          <input type="radio" name="file_config" value="csv1"> csv with ; separator <br>
+          <input type="radio" name="file_config" value="csv2"> csv with , separator <br>
+          <input type="radio" name="file_config" value="remove"> remove file <br>
+          <input type="radio" name="file_config" value="create_subset"> create subset (for now - excel only) <br>
+          <input type="radio" name="file_config" value="join_dataset"> join dataset (soon..) <br>
+        <p><a href="{{ url_for("jupyter") }}"> start jupyter (only local installation) </a></p>>
+
+
+
+    <p>upload status = {{ upload }} </p>
+
+    <input type="submit">
+    </form>
+
+
+
+    <h2>Upload new file</h2>
+
+      <form action = "{{ url_for('upload_file') }}" method = "POST"
+         enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <input type="submit">
+      </form>
+
+
+{% endblock %}
+

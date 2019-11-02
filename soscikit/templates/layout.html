@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <style type="text/css">
+      #content{
+
+        color: purple;
+        background-color: #f0f0f5 }
+
+
+    div.dataTables_wrapper {
+        width: 1000px;
+        margin: auto;
+    }
+
+
+      </style>
+        <script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery-3.4.1.min.js') }}"></script>
+
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery.dataTables.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/jquery.dataTables.min.css') }}">
+    <script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@5"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" >
+     <title>
+         {% block title %}
+             SoSciKit
+         {% endblock %}
+     </title>
+    {% endblock %}
+  </head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{{ url_for('index') }}">Menù</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="{{ url_for('index') }}">SoScikit<span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="{{ url_for('index') }}">Select File</a>
+          <a class="nav-item nav-link" href="#">Guide</a>
+          <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Github</a>
+        </div>
+      </div>
+    </nav>
+
+<ul class="nav nav-tabs" id="action_nav">
+  <li class="nav-item">
+    <a class="nav-link active" onmouseover="display_description('general')" href="{{ url_for('load') }}">Action menù</a>
+  </li>
+  <li class="nav-item">
+    <a onmouseover="display_description('monovariate')" class="nav-link active" href="{{ url_for('monovariate') }}">Monovariate</a>
+  </li>
+  <li class="nav-item">
+    <a onmouseover="display_description('bivariate')" class="nav-link active" href="{{ url_for('bivariate_and_regression') }}">Bivariate and regression</a>
+  </li>
+  <li class="nav-item">
+    <a onmouseover="display_description('recode')" class="nav-link active" href="{{ url_for('recode') }}">Recode</a>
+  </li>
+  <li class="nav-item">
+    <a onmouseover="display_description('crosstab')" class="nav-link active" href="{{ url_for('crosstab_and_typological_classification') }}">Crosstab_and_typological_classification</a>
+  </li>
+  <li class="nav-item">
+    <a onmouseover="display_description('kmeans')" class="nav-link active" href="{{ url_for('k_mean_classification') }}">k-mean classification</a>
+  </li>
+  <li class="nav-item">
+    <a onmouseover="display_description('compute')" class="nav-link active" href="{{ url_for('compute') }}">compute</a>
+  </li>
+  <li class="nav-item">
+    <a onmouseover="display_description('profiling')" id="profiling" class="nav-link active" href="{{ url_for("profiling_output") }}">profiling</a>
+  </li>
+
+  <!--<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+  -->
+</ul>
+
+
+    <div id="content" class="container-fluid">
+
+    {% block content %}
+    {% endblock %}
+    </div>
+
+
+    <div id="footer">
+      {% block footer %}
+      &copy; Copyright 2019 - MIT license - <a href="http://www.datalifelab.eu/">DataLifeLab & DSPS</a> by Marco Scarselli.
+      {% endblock %}
+    </div>
+
+    <script>
+        tippy('#profiling', {
+            content: "Alert! this action could take a few minutes",
+        });
+
+
+    </script>
+    <script src="{{ url_for('static', filename = 'js/popper.min.js')}}"  ></script>
+    <script src="{{ url_for('static', filename = 'js/bootstrap.min.js')}}" ></script>
+
+  </body>
+</html>

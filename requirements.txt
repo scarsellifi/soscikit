@@ -1,0 +1,11 @@
+pandas>=0.25.1
+flask
+seaborn
+numpy
+scipy
+uuid>=1.30
+matplotlib
+pandas_profiling
+altair
+xlrd>=1.1.0
+jupyter

@@ -1,0 +1,4 @@
+graft soscikit/plotting
+graft soscikit/stats_tools
+graft soscikit/templates
+graft soscikit/static
