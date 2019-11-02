@@ -29,7 +29,7 @@ You can start SoScikit by running
     
 or
 
-    python3.x -m soscikiti
+    python3.x -m soscikit
 
 it's start server and open your browser on localhost http://127.0.0.1:5555/
 
@@ -40,5 +40,5 @@ The package is actively maintained and developed as open-source software. If SoS
 
 ## Demo
 
-You can try a DEMO at http://soscikit.eu.pythonanywhere.com/
+You can try a [DEMO](http://soscikit.eu.pythonanywhere.com/)
 
