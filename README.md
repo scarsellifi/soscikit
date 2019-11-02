@@ -38,3 +38,7 @@ it's start server and open your browser on localhost http://127.0.0.1:5555/
 
 The package is actively maintained and developed as open-source software. If SoSciKit was helpful or interesting to you, you might want to get involved. There are several ways of contributing and helping. If you would like to be a industry partner or sponsor, please [drop us a line](mailto:scarselli@gmail.com).
 
+## Demo
+
+You can try a DEMO at http://soscikit.eu.pythonanywhere.com/
+
