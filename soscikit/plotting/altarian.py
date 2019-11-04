@@ -67,7 +67,7 @@ def altair_monovariate(data, options_tipo_var, lista_ordinale):
             text='Frequency:Q',
             tooltip=['X', 'Frequency']
         )
-        chart = (bars + text).properties(width=800, height=400).interactive()
+        chart = (bars + text).properties(width=500, height=300).interactive()
 
     return chart
 
@@ -100,5 +100,5 @@ def altair_bivariate(dataset, g_x, g_y):
         color='degree:N'
     )
 
-    chart = (points + polynomial_fit).properties(width=800, height=400).interactive()
+    chart = (points + polynomial_fit).properties(width=500, height=300).interactive()
     return chart
