@@ -13,18 +13,32 @@
 <body>
 
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> Crosstab output</h5>
+                    <div class="card-body">
+                        <p></p>
+                        {{ table | safe }}
+                        <p>  </p>
+                        {{ data | safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <p></p>
-    {{ table | safe }}
-    <p> Crosstab output </p>
-    {{ data | safe }}
-
-    <p> Plot </p>
-    <div id="vis"></div>
-
-
-    <p> Unique value for sorting ordinal values</p>
-    {{ unique_values | safe }}
+        <div class="col-6">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> Plot</h5>
+                    <div class="card-body">
+                        <img src="{{ img_link }}">
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     {% if abilitate_tipology == "abilitate" %}

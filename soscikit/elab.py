@@ -255,11 +255,16 @@ class Output():
     def ncrosstab_output(self, request, dataset):
         try:
             script = request.form["textarea_script"]
+            index_series = request.form["textarea_script_index"]
+            columns_series = request.form["textarea_script_columns"]
             self.script = script
+            self.index_series = index_series
+            self.columns_series = columns_series
         except:
             script = self.script
         data = dataset
         result = eval(script, {'data': data, "pd": pd})
+
 
         '''
         index = script.split("index=[")[1].split("]],")[0]
@@ -280,8 +285,18 @@ class Output():
 
         if result.index.nlevels == 1 & result.columns.nlevels == 1:
             abilitate_tipology = "abilitate"
+            stacked = result.stack().reset_index().rename(columns={0: 'value'})
+            print(stacked)
+            result_img = sns.barplot(x=stacked.columns[0], y=stacked.columns[2], hue=stacked.columns[1], data=stacked)
+            img_name = uuid.uuid4()
+            flask.session["img.png"] = img_name
+
+            plt.savefig("./static/images/{}.png".format(img_name))
+            plt.figure()
+            img_link = url_for("get_image", image_name="{}.png".format(img_name))
         else:
             abilitate_tipology = "disabilitate"
+            img_link = ""
 
         self.crosstab_session["ncrosstab_output"] = result.to_html(classes="draggable", table_id="corr_tab")
         self.crosstab_session["ncrosstab_output_margin"] = "pass"
@@ -290,7 +305,8 @@ class Output():
         return render_template("crosstab/crosstab_output.html",
                                table=result.to_html(classes="draggable",
                                                     table_id="corr_tab"),
-                               abilitate_tipology=abilitate_tipology)
+                               abilitate_tipology=abilitate_tipology,
+                               img_link=img_link)
 
     def ncrosstab_classification(self):
         result = self.crosstab_session["ncrosstab_output"]
