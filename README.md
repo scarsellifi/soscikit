@@ -9,25 +9,17 @@ The web application allows to use the python libraries through a graphical inter
 
 ## Installation and dependencies
 You need a python interpeter installed on PC / Server. 
-You need Python 3 to run this package. Other dependencies can be found in the requirements files
+You need Python 3 (tested 3.6 - 3.7) to run this package. Other dependencies can be found in the requirements files
 
 ### Using pip
 
 You can install using the pip package manager by running
 
-    pip install soscikit
-    
-or
-    
     pip3.x install soscikit
 
 ## Usage
 
 You can start SoScikit by running
-
-    python -m soscikit
-    
-or
 
     python3.x -m soscikit
 
