@@ -2,13 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f3756f8-3818-4388-a971-efd6db46d7da" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soscikit/static/uploads/Questionario_analisi(Risposte).xlsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/soscikit/static/uploads/iris1.xlsx" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/static/uploads/titanic.xlsx" afterPath="$PROJECT_DIR$/soscikit/static/uploads/titanic.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/__main__.py" afterPath="$PROJECT_DIR$/soscikit/__main__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/elab.py" afterPath="$PROJECT_DIR$/soscikit/elab.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_output.html" afterPath="$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_output.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/templates/select_action.html" afterPath="$PROJECT_DIR$/soscikit/templates/select_action.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/plotting/altarian.py" afterPath="$PROJECT_DIR$/soscikit/plotting/altarian.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/run.py" afterPath="$PROJECT_DIR$/soscikit/run.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/templates/bivariate/bivariate_plot.html" afterPath="$PROJECT_DIR$/soscikit/templates/bivariate/bivariate_plot.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/templates/bivariate/bivariate_selection.html" afterPath="$PROJECT_DIR$/soscikit/templates/bivariate/bivariate_selection.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/templates/calc.html" afterPath="$PROJECT_DIR$/soscikit/templates/calc.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_selection.html" afterPath="$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_selection.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/templates/index.html" afterPath="$PROJECT_DIR$/soscikit/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/templates/layout.html" afterPath="$PROJECT_DIR$/soscikit/templates/layout.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/templates/monovariate/monovariate_selection.html" afterPath="$PROJECT_DIR$/soscikit/templates/monovariate/monovariate_selection.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/templates/profiling.html" afterPath="$PROJECT_DIR$/soscikit/templates/profiling.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/soscikit/templates/recode/recode_selection.html" afterPath="$PROJECT_DIR$/soscikit/templates/recode/recode_selection.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,29 +26,89 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/soscikit_github$__main__.coverage" NAME="__main__ Coverage Results" MODIFIED="1572863003259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/soscikit" />
+    <SUITE FILE_PATH="coverage/soscikit_github$__main__.coverage" NAME="__main__ Coverage Results" MODIFIED="1572978591970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/soscikit" />
+  </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <splitter split-orientation="horizontal" split-proportion="0.5">
+            <split-first>
+              <leaf>
+                <file leaf-file-name="crosstab_output.html" pinned="false" current-in-tab="false">
+                  <entry file="file://$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_output.html">
+                    <provider selected="true" editor-type-id="text-editor">
+                      <state relative-caret-position="255">
+                        <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="29" />
+                        <folding />
+                      </state>
+                    </provider>
+                  </entry>
+                </file>
+                <file leaf-file-name="calc.html" pinned="false" current-in-tab="false">
+                  <entry file="file://$PROJECT_DIR$/soscikit/templates/calc.html">
+                    <provider selected="true" editor-type-id="text-editor">
+                      <state relative-caret-position="2482">
+                        <caret line="242" column="72" lean-forward="false" selection-start-line="242" selection-start-column="49" selection-end-line="242" selection-end-column="72" />
+                        <folding />
+                      </state>
+                    </provider>
+                  </entry>
+                </file>
+                <file leaf-file-name="bivariate_plot.html" pinned="false" current-in-tab="true">
+                  <entry file="file://$PROJECT_DIR$/soscikit/templates/bivariate/bivariate_plot.html">
+                    <provider selected="true" editor-type-id="text-editor">
+                      <state relative-caret-position="612">
+                        <caret line="36" column="43" lean-forward="true" selection-start-line="32" selection-start-column="8" selection-end-line="36" selection-end-column="43" />
+                        <folding />
+                      </state>
+                    </provider>
+                  </entry>
+                </file>
+              </leaf>
+            </split-first>
+            <split-second>
+              <leaf>
+                <file leaf-file-name="bivariate_selection.html" pinned="false" current-in-tab="true">
+                  <entry file="file://$PROJECT_DIR$/soscikit/templates/bivariate/bivariate_selection.html">
+                    <provider selected="true" editor-type-id="text-editor">
+                      <state relative-caret-position="257">
+                        <caret line="132" column="115" lean-forward="false" selection-start-line="132" selection-start-column="94" selection-end-line="132" selection-end-column="115" />
+                        <folding />
+                      </state>
+                    </provider>
+                  </entry>
+                </file>
+              </leaf>
+            </split-second>
+          </splitter>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.85924006">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/setup.py">
+          <file leaf-file-name="calc.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/soscikit/templates/calc.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="408">
-                  <caret line="24" column="21" lean-forward="false" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+                <state relative-caret-position="493">
+                  <caret line="242" column="101" lean-forward="true" selection-start-line="242" selection-start-column="101" selection-end-line="242" selection-end-column="101" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="crosstab_output.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_output.html">
+          <file leaf-file-name="__main__.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/soscikit/__main__.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="355">
-                  <caret line="43" column="46" lean-forward="true" selection-start-line="43" selection-start-column="46" selection-end-line="43" selection-end-column="46" />
-                  <folding />
+                <state relative-caret-position="238">
+                  <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+                  <folding>
+                    <element signature="e#43#57#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -58,8 +126,8 @@
           <file leaf-file-name="elab.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/soscikit/elab.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="493">
-                  <caret line="308" column="49" lean-forward="true" selection-start-line="308" selection-start-column="49" selection-end-line="308" selection-end-column="49" />
+                <state relative-caret-position="488">
+                  <caret line="181" column="20" lean-forward="true" selection-start-line="181" selection-start-column="20" selection-end-line="181" selection-end-column="20" />
                   <folding>
                     <element signature="e#0#17#0" expanded="true" />
                   </folding>
@@ -67,41 +135,51 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="bivariate_plot.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/soscikit/templates/bivariate/bivariate_plot.html">
+          <file leaf-file-name="altarian.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/soscikit/plotting/altarian.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="31" column="4" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="30" />
+                <state relative-caret-position="1700">
+                  <caret line="102" column="68" lean-forward="false" selection-start-line="102" selection-start-column="68" selection-end-line="102" selection-end-column="68" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="crosstab_selection.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_selection.html">
+          <file leaf-file-name="monovariate_selection.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/soscikit/templates/monovariate/monovariate_selection.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2295">
+                <state relative-caret-position="-47">
+                  <caret line="92" column="93" lean-forward="false" selection-start-line="92" selection-start-column="93" selection-end-line="92" selection-end-column="93" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="recode_selection.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/soscikit/templates/recode/recode_selection.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="204">
+                  <caret line="84" column="8" lean-forward="false" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="crosstab_classification.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_classification.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
                   <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="select_action.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/soscikit/templates/select_action.html">
+          <file leaf-file-name="crosstab_selection.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_selection.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1292">
-                  <caret line="76" column="25" lean-forward="false" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="layout.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/soscikit/templates/layout.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1122">
-                  <caret line="12" column="8" lean-forward="false" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="20" />
+                <state relative-caret-position="168">
+                  <caret line="226" column="0" lean-forward="false" selection-start-line="226" selection-start-column="0" selection-end-line="226" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -110,21 +188,9 @@
           <file leaf-file-name="run.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/soscikit/run.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3043">
-                  <caret line="179" column="3" lean-forward="false" selection-start-line="179" selection-start-column="3" selection-end-line="179" selection-end-column="3" />
+                <state relative-caret-position="204">
+                  <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
                   <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="altarian.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/soscikit/plotting/altarian.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="593">
-                  <caret line="69" column="62" lean-forward="false" selection-start-line="69" selection-start-column="62" selection-end-line="69" selection-end-column="62" />
-                  <folding>
-                    <element signature="e#0#20#0" expanded="true" />
-                  </folding>
                 </state>
               </provider>
             </entry>
@@ -136,7 +202,7 @@
           <file leaf-file-name="elab.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/soscikit/elab.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="102">
+                <state relative-caret-position="3009">
                   <caret line="189" column="48" lean-forward="false" selection-start-line="189" selection-start-column="31" selection-end-line="189" selection-end-column="48" />
                   <folding>
                     <element signature="e#0#17#0" expanded="true" />
@@ -152,6 +218,11 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>webbrowser.open(url)</find>
+      <find>monovariate</find>
+      <find>to_html</find>
+      <find>url</find>
+      <find>threading.Timer(</find>
+      <find>set</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -160,16 +231,22 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/soscikit/plotting/altarian.py" />
-        <option value="$PROJECT_DIR$/soscikit/__main__.py" />
-        <option value="$PROJECT_DIR$/soscikit/run.py" />
         <option value="$PROJECT_DIR$/soscikit/templates/monovariate/monovariate_plot.html" />
-        <option value="$PROJECT_DIR$/soscikit/templates/monovariate/monovariate_selection.html" />
-        <option value="$PROJECT_DIR$/soscikit/templates/layout.html" />
         <option value="$PROJECT_DIR$/soscikit/templates/select_action.html" />
-        <option value="$PROJECT_DIR$/setup.py" />
-        <option value="$PROJECT_DIR$/soscikit/elab.py" />
         <option value="$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_output.html" />
+        <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/soscikit/templates/index.html" />
+        <option value="$PROJECT_DIR$/soscikit/plotting/altarian.py" />
+        <option value="$PROJECT_DIR$/soscikit/elab.py" />
+        <option value="$PROJECT_DIR$/soscikit/run.py" />
+        <option value="$PROJECT_DIR$/soscikit/__main__.py" />
+        <option value="$PROJECT_DIR$/soscikit/templates/calc.html" />
+        <option value="$PROJECT_DIR$/soscikit/templates/layout.html" />
+        <option value="$PROJECT_DIR$/soscikit/templates/bivariate/bivariate_plot.html" />
+        <option value="$PROJECT_DIR$/soscikit/templates/bivariate/bivariate_selection.html" />
+        <option value="$PROJECT_DIR$/soscikit/templates/monovariate/monovariate_selection.html" />
+        <option value="$PROJECT_DIR$/soscikit/templates/recode/recode_selection.html" />
+        <option value="$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_selection.html" />
       </list>
     </option>
   </component>
@@ -181,7 +258,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="y" value="-1088" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -211,6 +288,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="soscikit_github" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="soscikit_github" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="soscikit_github" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SoSciKit.egg-info" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -540,18 +631,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-1088" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21215352" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2654388" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2654388" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21215352" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -560,7 +652,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -614,7 +705,7 @@
         <state relative-caret-position="1139">
           <caret line="69" column="62" lean-forward="false" selection-start-line="69" selection-start-column="62" selection-end-line="69" selection-end-column="62" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#0#20#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -627,60 +718,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/soscikit/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/soscikit/templates/monovariate/monovariate_selection.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="157" column="11" lean-forward="true" selection-start-line="157" selection-start-column="11" selection-end-line="157" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_classification_output.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="54" column="23" lean-forward="false" selection-start-line="53" selection-start-column="9" selection-end-line="54" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/soscikit/plotting/altarian.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="69" column="62" lean-forward="false" selection-start-line="69" selection-start-column="62" selection-end-line="69" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_selection.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2295">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/soscikit/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3043">
-          <caret line="179" column="3" lean-forward="false" selection-start-line="179" selection-start-column="3" selection-end-line="179" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/soscikit/templates/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1122">
-          <caret line="12" column="8" lean-forward="false" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -693,19 +734,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="21" lean-forward="false" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/soscikit/templates/monovariate/monovariate_plot.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="35" column="20" lean-forward="true" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="43" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soscikit/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="40" column="95" lean-forward="true" selection-start-line="40" selection-start-column="95" selection-end-line="40" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_output.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soscikit/templates/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="103" column="46" lean-forward="true" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soscikit/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soscikit/plotting/altarian.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1700">
+          <caret line="102" column="68" lean-forward="false" selection-start-line="102" selection-start-column="68" selection-end-line="102" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soscikit/elab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="181" column="20" lean-forward="true" selection-start-line="181" selection-start-column="20" selection-end-line="181" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -717,28 +808,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/soscikit/elab.py">
+    <entry file="file://$PROJECT_DIR$/soscikit/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding>
+            <element signature="e#43#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soscikit/templates/monovariate/monovariate_selection.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-47">
+          <caret line="92" column="93" lean-forward="false" selection-start-line="92" selection-start-column="93" selection-end-line="92" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soscikit/templates/recode/recode_selection.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="84" column="8" lean-forward="false" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_classification.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soscikit/templates/calc.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="308" column="49" lean-forward="true" selection-start-line="308" selection-start-column="49" selection-end-line="308" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
+          <caret line="242" column="101" lean-forward="true" selection-start-line="242" selection-start-column="101" selection-end-line="242" selection-end-column="101" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/soscikit/templates/bivariate/bivariate_plot.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="31" column="4" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="30" />
+        <state relative-caret-position="612">
+          <caret line="36" column="43" lean-forward="true" selection-start-line="32" selection-start-column="8" selection-end-line="36" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_output.html">
+    <entry file="file://$PROJECT_DIR$/soscikit/templates/bivariate/bivariate_selection.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="43" column="46" lean-forward="true" selection-start-line="43" selection-start-column="46" selection-end-line="43" selection-end-column="46" />
+        <state relative-caret-position="257">
+          <caret line="132" column="115" lean-forward="false" selection-start-line="132" selection-start-column="94" selection-end-line="132" selection-end-column="115" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/soscikit/templates/crosstab/crosstab_selection.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="226" column="0" lean-forward="false" selection-start-line="226" selection-start-column="0" selection-end-line="226" selection-end-column="0" />
           <folding />
         </state>
       </provider>

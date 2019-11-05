@@ -26,8 +26,8 @@
 -->
 <style type="text/css">
     #lstBox1, #output_option, #calcolo{
-  height:350px;
-  width:200px;
+  height:400px;
+  width:auto;
 
 }
 
@@ -91,98 +91,163 @@ function showcontent(elem) {
 </script>
 
 
-<div class="set_input">
 
 
-    <div class="box">
-    <b>Variables</b><br/>
-               <select multiple="multiple" id='lstBox1'>
-               {% for variable in variable_name_type %}
-                    <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
-               {% endfor %}
-                  <!--
-                   onmouseenter="mouselog(event)" onmouseleave="mouselog(event)"
-                  <option value="ajax">Ajax</option>
-                  <option value="jquery">jQuery</option>
-                  <option value="javascript">JavaScript</option>
-                  <option value="mootool">MooTools</option>
-                  <option value="prototype">Prototype</option>
-                  <option value="dojo">Dojo</option>
-                  -->
-            </select>
-    </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> Variables</h5>
+                    <div class="card-body">
 
-
-
-    <div class="box">
-    <b>Operation </b><br/>
-               <select multiple="multiple" id='output_option'>
-                  <option value="+">+</option>
-                  <option value="-">-</option>
-                  <option value="/">/</option>
-                  <option value="*">*</option>
-                  <option value="**">**</option>
-                   <option value="(">(</option>
-                   <option value=")">)</option>
-                   <option value="==">==</option>
-                   <option value=">=">>=</option>
-                   <option value="<="><=</option>
-                   <option value=">">></option>
-                   <option value="<"><</option>
-                   <option value="|">|</option>
-                   <option value="&">&</option>
-
-            </select>
-    </div>
-
-    <div class="box">
-    <b>costant</b><br/>
-        <input id="costante">
-    </div>
-
-
-    <div class="transferBtns">
-      <input type='button' id='btnRight' value ='  >  '/>
-      <br/><input type='button' id='btnLeft' value ='  <  '/>
-      <div class="submitContainer">
-      <input type="submit" id="generate_code", value="carica"/>
-      </div>
-    </div>
-
-
-
-
-    <div class="box">
-            <b>Calcolo </b><br/>
-            <select multiple="multiple" id='calcolo'>
-            </select>
-    </div>
-
-    <br/>
-
-
-
-    </div>
-
-
-    <div class="set_output">
-        <p> var name (on mouse over </p>
-        <p id="nome_completo_variabile"> </p>
-        <form action = "{{url_for('calc_output')}}" method = "POST">
-        <p>python code</p>
-        <div class="box">
-            <b>New variable name</b> <br/>
-            <input id="nuova_variabile" name="new_variabile">
-        </div>
-            <p>dataset</p>
-            <div>
-            <textarea rows="1" columns = "100" id="dataset" class = "textarea" name="dataset">{{ dataset }}</textarea>
-            <p>formula</p>
-            <textarea rows="4" columns = "200" id="cell" class = "textarea" name="formula"></textarea>
+                   <!-- <select id='lstBox1' class="custom-select" multiple="multiple" > -->
+                   <select id='lstBox1' class="mdb-select colorful-select dropdown-primary md-form" multiple searchable="Search here..">
+                   {% for variable in variable_name_type %}
+                        <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                   {% endfor %}
+                      <!--
+                       onmouseenter="mouselog(event)" onmouseleave="mouselog(event)"
+                      <option value="ajax">Ajax</option>
+                      <option value="jquery">jQuery</option>
+                      <option value="javascript">JavaScript</option>
+                      <option value="mootool">MooTools</option>
+                      <option value="prototype">Prototype</option>
+                      <option value="dojo">Dojo</option>
+                      -->
+                    </select>
+                    </div>
+                </div>
             </div>
-        <input type="submit", value="esegui operazione">
+        </div>
+        <div class="col-2">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> Operation</h5>
+                    <div class="card-body">
 
-        </form>
+
+
+    <!-- <div class="box"> -->
+
+                       <select class="custom-select" multiple="multiple" id='output_option'>
+                          <option value="+">+</option>
+                          <option value="-">-</option>
+                          <option value="/">/</option>
+                          <option value="*">*</option>
+                          <option value="**">**</option>
+                           <option value="(">(</option>
+                           <option value=")">)</option>
+                           <option value="==">==</option>
+                           <option value=">=">>=</option>
+                           <option value="<="><=</option>
+                           <option value=">">></option>
+                           <option value="<"><</option>
+                           <option value="|">|</option>
+                           <option value="&">&</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="box"> -->
+        <div class="col-2">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> Costant</h5>
+                    <div class="card-body">
+
+                        <input id="costante">
+                    </div>
+                </div>
+            </div>
+
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> move</h5>
+                    <div class="card-body">
+
+                          <input type='button' class="btn btn-secondary btn-sm"  id='btnRight' value ='  >  '/>
+                          </br>
+                          </br>
+                          <input type='button' class="btn btn-secondary btn-sm" id='btnLeft'  value ='  <  '/>
+                          </br>
+                          </br>
+
+                          <input type="submit" id="generate_code" class="btn btn-primary btn-sm" value="load"/>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    <!-- <div class="box"> -->
+        <div class="col-3">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> calcolo</h5>
+                    <div class="card-body">
+                        <b>Calcolo </b><br/>
+                        <select class="custom-select" multiple="multiple" id='calcolo'>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+</div>
+    <div class="row">
+        <div class = "col-4">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> var name (on mouse over) </h5>
+                    <div class="card-body">
+
+                        <p id="nome_completo_variabile"> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class = "col-8">
+            <form action = "{{url_for('calc_output')}}" method = "POST">
+                <div class = "bd-card">
+                    <div class="card">
+                    <h5 class="card-header"> python code output </h5>
+                        <div class="card-body">
+
+
+                            <b>New variable name</b> </br>
+                            <input id="nuova_variabile" name="new_variabile">
+                            </br>
+                                <p>dataset</p>
+                                <div>
+                                <textarea rows="1" columns = "100" id="dataset" class="form-control" aria-label="dataset" name="dataset">{{ dataset }}</textarea>
+                                <p>formula</p>
+                                <textarea rows="4" columns = "200" id="cell"textarea class="form-control" aria-label="forumla" name="formula"></textarea>
+                                </div>
+                            <input type="submit" class="btn btn-primary" value="execute python code">
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
     </div>
 
 

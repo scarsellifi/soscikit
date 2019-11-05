@@ -20,6 +20,7 @@ setup(name='SoSciKit',
           "pandas_profiling",
           "altair",
           "xlrd==1.1.0",
-          "jupyter"
+          "jupyter",
+          "openpyxl"
       ],
       zip_safe=False)

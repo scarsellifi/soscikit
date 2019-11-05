@@ -10,6 +10,8 @@ def main():
     mpl.use('Agg')
     from elab import Elab
 
+
+
     obj_elab = Elab()
 
     APP_ROOT = os.path.dirname(os.path.abspath(__file__))

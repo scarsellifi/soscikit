@@ -84,90 +84,138 @@ function showcontent(elem) {
         $("#nome_completo_variabile").text(elem.value);
     }
 </script>
+</head>
+<body>
+    <div class="container-fluid">
+         <form action = "{{url_for('bivariate_plot')}}" method = "POST", id="form", enctype="multipart/form-data" accept-charset="UTF-8">
 
-<h1> bivariate selection </h1>
-<div class="set_input">
+            <h1> bivariate selection </h1>
 
- <form action = "{{url_for('bivariate_plot')}}" method = "POST", id="form", enctype="multipart/form-data" accept-charset="UTF-8">
-    <div class="box">
-    <b>variabili disponibili X e Y</b><br/>
+            <div class = "row">
+                <div class = "col-4">
+                    <div class = "bd-card">
+                        <div class="card">
+                            <h5 class="card-header"> X Variable </h5>
+                            <div class="card-body">
 
-               <select multiple="multiple" id='lstBox1', name="bivariate_x">
-               {% for variable in variable_name_type %}
-                    <option onclick="save_on(this, 'select_index')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
-               {% endfor %}
+                               <select multiple="multiple"  id='lstBox1' name="bivariate_x" class="custom-select">
+                               {% for variable in variable_name_type %}
+                                    <option onclick="save_on(this, 'select_index')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                               {% endfor %}
 
-            </select>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class = "col-4">
+                    <div class = "bd-card">
+                        <div class="card">
+                            <h5 class="card-header"> Y Variable </h5>
+                            <div class="card-body">
+                            <select multiple="multiple" id='lstBox2', name="bivariate_y" class="custom-select">
+                                   {% for variable in variable_name_type %}
+                                        <option onclick="save_on(this, 'select_columns')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                                   {% endfor %}
 
-
-        <select multiple="multiple" id='lstBox2', name="bivariate_y">
-               {% for variable in variable_name_type %}
-                    <option onclick="save_on(this, 'select_columns')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
-               {% endfor %}
-
-            </select>
-
-
-        <select multiple="multiple" id='lstBox3', name="bivariate_hue">
-            {% for variable in variable_name_type_obj %}
-                <option onclick="save_on(this, 'select_hue')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type_obj[ variable ]}} </option>
-            {% endfor %}
-         </select>
-    <!--
-        <h2> variabile type </h2>
-        <input type="radio" name="var_type" value="categoriale" checked> categorical <br>
-        <input type="radio" name="var_type" value="cardinale"> cardinal <br>
-    <input type="radio" name="var_type" value="ordinale"> ordinal <br>
-
-    <h2> for ordinal variable set order</h2>
-    <p> list example: "one","two","three </p>
-    <input type="text" name="ordinal_list" size="200">
-    -->
-    </div>
-
-
-
-
-</div>
-<div class="set_output">
-<p> nome variabile completo (allo scorrimento del mouse) </p>
-        <p id="nome_completo_variabile"> </p>
-</div>
-    <br/>
-
-<div>
-    <button type="button" onclick="create_script()"> generate python script for bivariate </button>
-
-    </div>
-
-    <div >
-    <p> index on variable:</p>
-    <ul id="select_index">
-
-    </ul>
-    </div>
-    <div >
-    <p> columns on variable </p>
-    <ul id="select_columns">
-
-    </ul>
-    </div>
-    <div >
-    <p> hue on variable </p>
-    <ul id="select_hue">
-
-    </ul>
-    </div>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class = "col-4">
+                    <div class = "bd-card">
+                        <div class="card">
+                            <h5 class="card-header"> Hue Variable </h5>
+                            <div class="card-body">
 
 
-    <div>
-
-    <textarea rows="4" columns = "200" class = "textarea" name="textarea_script" id="textarea_script" ></textarea>
+                                <select multiple="multiple" id='lstBox3' name="bivariate_hue" class="custom-select">
+                                    {% for variable in variable_name_type_obj %}
+                                        <option onclick="save_on(this, 'select_hue')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type_obj[ variable ]}} </option>
+                                    {% endfor %}
+                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+                <!--
+                    <h2> variabile type </h2>
+                    <input type="radio" name="var_type" value="categoriale" checked> categorical <br>
+                    <input type="radio" name="var_type" value="cardinale"> cardinal <br>
+                <input type="radio" name="var_type" value="ordinale"> ordinal <br>
 
-    </div>
-    <input type="submit">
+                <h2> for ordinal variable set order</h2>
+                <p> list example: "one","two","three </p>
+                <input type="text" name="ordinal_list" size="200">
+                -->
+
+
+
+
+
+
+
+        <div class="row">
+            <div class = "col-4">
+                    <div class = "bd-card">
+                        <div class="card">
+                            <h5 class="card-header"> Variable name </h5>
+                            <div class="card-body">
+
+
+                                <p id="nome_completo_variabile"> </p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+                <div class = "col-12">
+                    <div class = "bd-card">
+                        <div class="card">
+                            <h5 class="card-header"> generate python code and execute</h5>
+                            <div class="card-body">
+
+
+
+                    <button type="button" onclick="create_script()"> generate python script for bivariate </button>
+
+
+
+                    <div >
+                    <p> index on variable:</p>
+                    <ul id="select_index">
+
+                    </ul>
+                    </div>
+                    <div >
+                    <p> columns on variable </p>
+                    <ul id="select_columns">
+
+                    </ul>
+                    </div>
+                    <div >
+                    <p> hue on variable </p>
+                    <ul id="select_hue">
+
+                    </ul>
+                    </div>
+
+
+                    <div>
+
+                    <textarea rows="4" columns = "200" class = "textarea" name="textarea_script" id="textarea_script" ></textarea>
+                            </div>
+
+                    </div>
+                    <input type="submit">
+                    </div>
+                </div>
+         </div>
     </form>
+    </div>
 
     <script>
 function save_on(elem, index) {
@@ -235,7 +283,7 @@ function create_script(){
 
 
 
-
+</body>
 {% endblock %}
 
 

@@ -90,7 +90,7 @@ function showcontent(elem) {
                         <div class="card">
                             <h5 class="card-header">variables</h5>
                             <div class="card-body">
-                               <select multiple="multiple" id='lstBox1', name="monovariate">
+                               <select multiple="multiple" id='lstBox1' class="custom-select" name="monovariate">
                                {% for variable in variable_name_type %}
                                     <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
                                {% endfor %}
@@ -105,12 +105,12 @@ function showcontent(elem) {
         <div class="col-sm-12">
             <div class = "bd-card">
                 <div class="card">
-                    <div class="set_output">
-                        <div class="card-body">
-                            <h5 class="card-header">for long variable name (mouse over display)</h5>
-                                <p id="nome_completo_variabile"> </p>
-                        </div>
+                    <h5 class="card-header">for long variable name (mouse over display)</h5>
+                    <div class="card-body">
+
+                            <p id="nome_completo_variabile"> </p>
                     </div>
+
                 </div>
             </div>
         </div>

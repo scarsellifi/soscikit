@@ -79,40 +79,49 @@ function showcontent(elem) {
     }
 </script>
 
+<form action = "{{url_for('recode_operation')}}" method = "POST", enctype="multipart/form-data" accept-charset="UTF-8">
 <h1> recode </h1>
-<div class="set_input">
+    <div class="row">
+        <div class="col">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> Variables</h5>
+                        <div class="card-body">
+                            <select multiple="multiple" id='lstBox1', name="recode_var">
+                            {% for variable in variable_name_type %}
+                                <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                            {% endfor %}
 
- <form action = "{{url_for('recode_operation')}}" method = "POST", enctype="multipart/form-data" accept-charset="UTF-8">
-    <div class="box">
-    <b>variabili disponibili</b><br/>
-               <select multiple="multiple" id='lstBox1', name="recode_var">
-               {% for variable in variable_name_type %}
-                    <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
-               {% endfor %}
+                            </select>
 
-            </select>
-        <!--
-        <h2> variabile type </h2>
-        <input type="radio" name="var_type" value="categoriale" checked> categorical and ordinal <br>
-        <input type="radio" name="var_type" value="cardinale"> cardinal <br>
 
-    <h2> drop missing </h2>
-        <input type="radio" name="drop_missing" value="drop" > drop missing <br>
-        <input type="radio" name="drop_missing" value="no_drop" checked> maintain missing<br>
-        -->
+                        </div>
+                <input type="submit" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
     </div>
-    <input type="submit">
 
 
 
-    </form>
-</div>
-<div class="set_output">
-<p> nome variabile completo (allo scorrimento del mouse) </p>
-        <p id="nome_completo_variabile"> </p>
-</div>
-    <br/>
 
+
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> Variable names </h5>
+                    <div class="card-body">
+                        <p id="nome_completo_variabile"> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 {% endblock %}
 
 
