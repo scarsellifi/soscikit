@@ -7,7 +7,6 @@
 
 #lstBox1, #output_option, #calcolo{
   height:350px;
-  width:800px;
 
 }
 
@@ -87,7 +86,7 @@ function showcontent(elem) {
                 <div class="card">
                     <h5 class="card-header"> Variables</h5>
                         <div class="card-body">
-                            <select multiple="multiple" id='lstBox1', name="recode_var">
+                            <select multiple="multiple" id='lstBox1' class="form-control" name="recode_var">
                             {% for variable in variable_name_type %}
                                 <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
                             {% endfor %}

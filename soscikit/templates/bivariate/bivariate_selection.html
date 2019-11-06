@@ -9,17 +9,17 @@
     <style type="text/css">
     #lstBox1, #output_option, #calcolo{
   height:350px;
-  width:400px;
+
 
 }
     #lstBox2, #output_option, #calcolo{
   height:350px;
-  width:400px;
+
 
 }
         #lstBox3, #output_option, #calcolo{
   height:350px;
-  width:400px;
+
 
 }
 
@@ -98,7 +98,7 @@ function showcontent(elem) {
                             <h5 class="card-header"> X Variable </h5>
                             <div class="card-body">
 
-                               <select multiple="multiple"  id='lstBox1' name="bivariate_x" class="custom-select">
+                               <select multiple="multiple"  id='lstBox1' name="bivariate_x" class="form-control">
                                {% for variable in variable_name_type %}
                                     <option onclick="save_on(this, 'select_index')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
                                {% endfor %}
@@ -113,7 +113,7 @@ function showcontent(elem) {
                         <div class="card">
                             <h5 class="card-header"> Y Variable </h5>
                             <div class="card-body">
-                            <select multiple="multiple" id='lstBox2', name="bivariate_y" class="custom-select">
+                            <select multiple="multiple" id='lstBox2', name="bivariate_y" class="form-control">
                                    {% for variable in variable_name_type %}
                                         <option onclick="save_on(this, 'select_columns')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
                                    {% endfor %}
@@ -130,7 +130,7 @@ function showcontent(elem) {
                             <div class="card-body">
 
 
-                                <select multiple="multiple" id='lstBox3' name="bivariate_hue" class="custom-select">
+                                <select multiple="multiple" id='lstBox3' name="bivariate_hue" class="form-control">
                                     {% for variable in variable_name_type_obj %}
                                         <option onclick="save_on(this, 'select_hue')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type_obj[ variable ]}} </option>
                                     {% endfor %}

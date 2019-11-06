@@ -27,7 +27,6 @@
 <style type="text/css">
     #lstBox1, #output_option, #calcolo{
   height:400px;
-  width:auto;
 
 }
 
@@ -102,7 +101,7 @@ function showcontent(elem) {
                     <div class="card-body">
 
                    <!-- <select id='lstBox1' class="custom-select" multiple="multiple" > -->
-                   <select id='lstBox1' class="mdb-select colorful-select dropdown-primary md-form" multiple searchable="Search here..">
+                   <select id='lstBox1' class="form-control" multiple="multiple">
                    {% for variable in variable_name_type %}
                         <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
                    {% endfor %}
