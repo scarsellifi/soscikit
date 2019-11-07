@@ -87,9 +87,9 @@ function showcontent(elem) {
             <div class="card">
                 <h5 class="card-header"> X Variable </h5>
                 <div class="card-body">
-                    <select multiple="multiple" id='lstBox1' name="bivariate_x" class="custom-select">
+                    <select onchange="save_on_x(this)" multiple="multiple" id='lstBox1' name="bivariate_x" class="custom-select">
                     {% for variable in variable_name_type %}
-                        <option onclick="save_on_x(this)" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                        <option  onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
                     {% endfor %}
                     </select>
                 </div>
@@ -103,9 +103,9 @@ function showcontent(elem) {
                 <div class="card-body">
 
 
-                    <select multiple="multiple" id='lstBox2' class="custom-select" name="bivariate_y">
+                    <select onchange="save_on_y(this)" multiple="multiple" id='lstBox2' class="custom-select" name="bivariate_y">
                        {% for variable in variable_name_type %}
-                            <option onclick="save_on_y(this)" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                            <option  onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
                        {% endfor %}
 
                     </select>

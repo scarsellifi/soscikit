@@ -98,9 +98,9 @@ function showcontent(elem) {
                             <h5 class="card-header"> X Variable </h5>
                             <div class="card-body">
 
-                               <select multiple="multiple"  id='lstBox1' name="bivariate_x" class="form-control">
+                               <select onchange="save_on(this, 'selected_index')" multiple="multiple"  id='lstBox1' name="bivariate_x" class="form-control">
                                {% for variable in variable_name_type %}
-                                    <option onclick="save_on(this, 'select_index')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                                    <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
                                {% endfor %}
 
                                 </select>
@@ -113,9 +113,9 @@ function showcontent(elem) {
                         <div class="card">
                             <h5 class="card-header"> Y Variable </h5>
                             <div class="card-body">
-                            <select multiple="multiple" id='lstBox2', name="bivariate_y" class="form-control">
+                            <select onchange="save_on(this, 'selected_columns')" multiple="multiple" id='lstBox2', name="bivariate_y" class="form-control">
                                    {% for variable in variable_name_type %}
-                                        <option onclick="save_on(this, 'select_columns')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                                        <option  onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
                                    {% endfor %}
 
                             </select>
@@ -130,9 +130,9 @@ function showcontent(elem) {
                             <div class="card-body">
 
 
-                                <select multiple="multiple" id='lstBox3' name="bivariate_hue" class="form-control">
+                                <select onchange="save_on(this, 'selected_hue')" multiple="multiple" id='lstBox3' name="bivariate_hue" class="form-control">
                                     {% for variable in variable_name_type_obj %}
-                                        <option onclick="save_on(this, 'select_hue')" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type_obj[ variable ]}} </option>
+                                        <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type_obj[ variable ]}} </option>
                                     {% endfor %}
                                  </select>
                             </div>
@@ -186,19 +186,24 @@ function showcontent(elem) {
 
                     <div >
                     <p> index on variable:</p>
-                    <ul id="select_index">
-
+                        <ul id="select_index">
+                        <li id="selected_index">
+                    </li>
                     </ul>
                     </div>
                     <div >
                     <p> columns on variable </p>
                     <ul id="select_columns">
+                        <li id="selected_columns">
+                        </li>
 
                     </ul>
                     </div>
                     <div >
                     <p> hue on variable </p>
                     <ul id="select_hue">
+                        <li id="selected_hue">
+                        </li>
 
                     </ul>
                     </div>
@@ -219,19 +224,13 @@ function showcontent(elem) {
 
     <script>
 function save_on(elem, index) {
-    var node = document.createElement("LI");
-    node.setAttribute("onclick", "autoremove(this)");
-    node.setAttribute("id", "elem.value");
-    var textnode = document.createTextNode("'" +  elem.value + "'");
-    node.appendChild(textnode);
+    document.getElementById(index).innerHTML = "'" +  elem.value + "'";
 
-    var index_element = document.getElementById(index);
 
-    if (index_element.childElementCount < 1) {
-    index_element.appendChild(node);
+    /*if (index_element.childElementCount < 1) {
     } else {
         index_element.removeChild(index_element.childNodes[1]);
-    }
+    }*/
 
 }
 
