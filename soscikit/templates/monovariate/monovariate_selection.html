@@ -86,49 +86,55 @@ function showcontent(elem) {
 
     <div class="row">
         <div class="col-sm-12">
-                    <div class = "bd-card">
-                        <div class="card">
-                            <h5 class="card-header">variables</h5>
-                            <div class="card-body">
-                               <select multiple="multiple" id='lstBox1' class="custom-select" name="monovariate">
-                               {% for variable in variable_name_type %}
-                                    <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
-                               {% endfor %}
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header">variables</h5>
+                    <div class="card-body">
+                       <select multiple="multiple" id='lstBox1' class="custom-select" name="monovariate">
+                       {% for variable in variable_name_type %}
+                            <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                       {% endfor %}
 
-                                </select>
-                            </div>
-                        </div>
+                        </select>
                     </div>
+                </div>
+            </div>
         </div>
+    </div>
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col">
             <div class = "bd-card">
                 <div class="card">
                     <h5 class="card-header">for long variable name (mouse over display)</h5>
                     <div class="card-body">
-
-                            <p id="nome_completo_variabile"> </p>
+                        <p id="nome_completo_variabile"> </p>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <div class ="row">
-        <div class="col-sm-12">
+        <div class="col">
             <div class = "bd-card">
                 <div class="card">
                     <h5 class="card-header"> Options</h5>
                     <div class="card-body">
 
                         <h5 class="card-title"> variabile type </h5>
-                        <input type="radio" name="var_type" value="categoriale" checked> categorical and ordinal <br>
-                        <input type="radio" name="var_type" value="cardinale"> cardinal <br>
+                        <input type="radio" name="var_type" id="categorical" onclick="hide()" value="categoriale" checked> categorical and ordinal <br>
+                        <input type="radio" name="var_type" id="cardinal" onclick="show()" value="cardinale"> cardinal <br>
 
                         <h5 class="card-title"> drop missing </h5>
                         <input type="radio" name="drop_missing" value="drop" > drop missing <br>
                         <input type="radio" name="drop_missing" value="no_drop" checked> maintain missing<br>
+
+                        <!-- when select cardinale -->
+                        <div id="plot_kind">
+                            <h5 class="card-title"> plot kind </h5>
+                            <input type="radio" name="plot_kind" value="bar" checked> bar <br>
+                            <input type="radio" name="plot_kind" value="histogram"> histogram (soon..)<br>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,12 +144,12 @@ function showcontent(elem) {
     </div>
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col">
             <div class = "bd-card">
                 <div class="card">
+                    <h5 class="card-header">submit button</h5>
                     <div class="card-body">
-                        <h5 class="card-header">submit button</h5>
-                            <input type="submit">
+                        <input type="submit">
                     </div>
                 </div>
             </div>
@@ -157,6 +163,24 @@ function showcontent(elem) {
 
     </form>
 </body>
+
+    <script>
+    let hide = function(){
+        document.getElementById("plot_kind").style.display = "none";
+    };
+    let show = function() {
+        document.getElementById("plot_kind").style.display = "block";
+    };
+
+    document.onload = hide();
+
+
+
+
+
+
+
+    </script>
 {% endblock %}
 
 

@@ -25,37 +25,34 @@
 
 <body>
 
-<div class="container">
+<div class="container-fluid">
 
     <div class="row">
-
-            <div class="col-sm-6">
-
-    <p></p>
-    {{ table | safe }}
-    <p> Crosstab output </p>
-    {{ data | safe }}
-
+        <div class="col-sm-6">
+             <div class = "bd-card">
+                        <div class="card">
+                            <h5 class="card-header"> Crosstab output</h5>
+                            <div class="card-body">
+                                {{ data | safe }}
+                            </div>
+                        </div>
+             </div>
+        </div>
+        <div class="col-sm-6">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> Plot</h5>
+                    <div class="card-body">
+                        <img src="{{ img_link }}">
+                    </div>
+                </div>
             </div>
-             <div class="col-sm-6">
-
-    <p> Plot </p>
-    <div id="vis"></div>
-
-    <img src="{{ img_link }}">
-            </div>
-    <p> Unique value for sorting ordinal values</p>
-    {{ unique_values | safe }}
+        </div>
     </div>
-
-    <button id="classification">Tipological classification </button>
-
-    <script>
-        document.getElementById("classification").onclick = function () {
-        location.href = "{{ url_for('ncrosstab_classification' ) }}";
-            };
+</div>
 
 
+<script>
 
 
     $(document).ready( function () {
@@ -67,7 +64,7 @@
 
 
 
-    </script>
+</script>
 
 
 

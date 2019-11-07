@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block content %}
+
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -78,21 +78,27 @@ function showcontent(elem) {
     }
 </script>
 
-
-
+</head>
+{% block content %}
 <h1> n K-means </h1>
-<div class="set_input">
+<div class="row">
+    <div class="col">
+        <div class = "bd-card">
+            <div class="card">
+            <h5 class="card-header"> Variable </h5>
+                <div class="card-body">
 
 
-    <div class="box">
-    <b>variabili disponibili</b><br/>
+               <select multiple="multiple" id='lstBox1' name="bivariate_x" class="form-control">
+                   {% for variable in variable_name_type %}
+                        <option onclick="save_on_x(this)" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                   {% endfor %}
 
-               <select multiple="multiple" id='lstBox1', name="bivariate_x">
-               {% for variable in variable_name_type %}
-                    <option onclick="save_on_x(this)" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
-               {% endfor %}
-
-            </select>
+                </select>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -106,75 +112,79 @@ function showcontent(elem) {
     <p> list example: "one","two","three </p>
     <input type="text" name="ordinal_list" size="200">
     -->
-    </div>
-
-
-
-
 </div>
-<div class="set_output">
-<p> nome variabile completo (allo scorrimento del mouse) </p>
-        <p id="nome_completo_variabile"> </p>
+
+<div class="row">
+    <div class="col">
+        <div class = "bd-card">
+            <div class="card">
+            <h5 class="card-header"> variable name </h5>
+                <div class="card-body">
+                    <p id="nome_completo_variabile"> </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-    <br/>
+
+<div class ="row">
+    <div class="col">
+        <div class = "bd-card">
+            <div class="card">
+            <h5 class="card-header"> selected variable: </h5>
+                <div class="card-body">
+                    <ul id="select_index">
+                    </ul>
 
 
-    <div>
-    <h3> selected variable:</h3>
-    <ul id="select_index">
 
-    </ul>
+
+                    <form action = "{{ url_for('cluster_output')}}" method = "POST", enctype="multipart/form-data" accept-charset="UTF-8">
+                    <h3> select number of class</h3>
+                    <select id="cluster_class">
+                        <option name="number_of_class" value = 1>1</option>
+                        <option name="number_of_class" value = 2>2</option>
+                        <option name="number_of_class" value = 3>3</option>
+                        <option name="number_of_class" value = 4>4</option>
+                        <option name="number_of_class" value = 5>5</option>
+                        <option name="number_of_class" value = 6>6</option>
+                        <option name="number_of_class" value = 7>7</option>
+                        <option name="number_of_class" value = 8>8</option>
+                        <option name="number_of_class" value = 19>9</option>
+                    </select>
+
+                    <button class="btn btn-primary" onclick="create_script()"> generate python script for kmean cluster</button>
+
+
+
+
+
+                    <h3>Code for python execution</h3>
+                    <textarea rows="4" columns = "200" class = "textarea" name="textarea_script" id="textarea_script"></textarea>
+
+
+
+                    <h3>New variabile name</h3><br>
+                    <input name="new_var_name" required><br>
+
+                    <!-- inactive for now -->
+
+                    <p>save variable: work in progress inactive for now </p>
+                    <select id="save_variable">
+                        <option value ="save_yes">yes</option>
+                        <option value ="save_no">no</option>
+                    </select>
+
+                    <input type="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-    <div>
-    <h3> select number of class</h3>
-    <select id="cluster_class">
-    <option name="number_of_class" value = 1>1</option>
-        <option name="number_of_class" value = 2>2</option>
-        <option name="number_of_class" value = 3>3</option>
-        <option name="number_of_class" value = 4>4</option>
-        <option name="number_of_class" value = 5>5</option>
-        <option name="number_of_class" value = 6>6</option>
-        <option name="number_of_class" value = 7>7</option>
-        <option name="number_of_class" value = 8>8</option>
-        <option name="number_of_class" value = 19>9</option>
-    </select>
-    </div>
-
-
-    <div>
-    <button onclick="create_script()"> generate python script for kmean cluster</button>
-
-    </div>
+</div>
 
 
 
-    <div>
-        <form action = "{{ url_for('cluster_output')}}" method = "POST", enctype="multipart/form-data" accept-charset="UTF-8">
-
-
-        <h3>Code for python execution</h3>
-        <textarea rows="4" columns = "200" class = "textarea" name="textarea_script" id="textarea_script"></textarea>
-    </div>
-
-
-    <h3>New variabile name</h3><br>
-    <input name="new_var_name" required><br>
-
-    <!-- inactive for now -->
-
-    <p>save variable: work in progress inactive for now </p>
-    <select id="save_variable">
-        <option value ="save_yes">yes</option>
-        <option value ="save_no">no</option>
-    </select>
-
-    <input type="submit">
-
-
-
-    </form>
 
 <script>
 function save_on_x(elem) {

@@ -56,6 +56,14 @@
         location.href = "{{ url_for('ncrosstab_classification' ) }}";
             };
 
+    $(document).ready( function () {
+    $('#corr_tab').DataTable(
+        {"paging": false,
+        "scrollY": "400px",
+        "scrollX": "400px",}
+    );
+    } );
+
 
     </script>
 
