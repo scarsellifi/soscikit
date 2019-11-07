@@ -80,27 +80,39 @@ function showcontent(elem) {
 
 
 
-<h1> n crosstab selection </h1>
-<div class="set_input">
+<h1> crosstabulation selection </h1>
+<div class="row">
+    <div class = "col-6">
+        <div class = "bd-card">
+            <div class="card">
+                <h5 class="card-header"> X Variable </h5>
+                <div class="card-body">
+                    <select multiple="multiple" id='lstBox1' name="bivariate_x" class="custom-select">
+                    {% for variable in variable_name_type %}
+                        <option onclick="save_on_x(this)" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                    {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "col-6">
+        <div class = "bd-card">
+            <div class="card">
+                <h5 class="card-header"> Y Variable </h5>
+                <div class="card-body">
 
 
-    <div class="box">
-    <b>variabili disponibili X e Y</b><br/>
+                    <select multiple="multiple" id='lstBox2' class="custom-select" name="bivariate_y">
+                       {% for variable in variable_name_type %}
+                            <option onclick="save_on_y(this)" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
+                       {% endfor %}
 
-               <select multiple="multiple" id='lstBox1', name="bivariate_x">
-               {% for variable in variable_name_type %}
-                    <option onclick="save_on_x(this)" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
-               {% endfor %}
-
-            </select>
-
-
-        <select multiple="multiple" id='lstBox2', name="bivariate_y">
-               {% for variable in variable_name_type %}
-                    <option onclick="save_on_y(this)" onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type[ variable ]}} </option>
-               {% endfor %}
-
-            </select>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--
         <h2> variabile type </h2>
@@ -118,64 +130,101 @@ function showcontent(elem) {
 
 
 </div>
-<div class="set_output">
-<p> nome variabile completo (allo scorrimento del mouse) </p>
-        <p id="nome_completo_variabile"> </p>
-</div>
-    <br/>
+<div class="row">
+    <div class = "bd-card">
+        <div class="card">
+        <h5 class="card-header"> Variable Name </h5>
+            <div class="card-body">
+                <p id="nome_completo_variabile"> </p>
 
 
-    <div >
-    <p> index on variable:</p>
-    <ul id="select_index">
 
-    </ul>
+
+                <div>
+                <p> index on variable:</p>
+                <ul id="select_index">
+
+                </ul>
+                </div>
+                <div >
+                <p> columns on variable </p>
+                <ul id="select_columns">
+
+                </ul>
+                </div>
+
+                <div>
+                <button onclick="create_script()"> generate python script for crosstab</button>
+
+                </div>
+            </div>
+        </div>
     </div>
-    <div >
-    <p> columns on variable </p>
-    <ul id="select_columns">
 
-    </ul>
-    </div>
+
 
     <div>
-    <button onclick="create_script()"> generate python script for crosstab</button>
-
-    </div>
-
-
-
-    <div>
     <div class="row">
 
             <div class="col-sm-6">
-            <p> crosstab without margin </p>
-            <form action = "{{ url_for('ncrosstab_output')}}" method = "POST", enctype="multipart/form-data" accept-charset="UTF-8">
-            <textarea rows="4" columns = "200" class = "textarea" name="textarea_script" id="textarea_script"></textarea>
+                <div class = "bd-card">
+                    <div class="card">
+                    <h5 class="card-header"> crosstab without margin </h5>
+                        <div class="card-body">
+
+
+                            <form action = "{{ url_for('ncrosstab_output')}}" method = "POST", enctype="multipart/form-data" accept-charset="UTF-8">
+                            <textarea rows="4" columns = "200" class = "textarea" name="textarea_script" id="textarea_script"></textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="col-sm-6">
-            <p> crosstab with margin </p>
-            <textarea rows="4" columns = "200" class = "textarea" name="textarea_script_margin" id="textarea_script_margin"></textarea>
+                <div class = "bd-card">
+                    <div class="card">
+                    <h5 class="card-header"> crosstab with margin </h5>
+                        <div class="card-body">
+
+
+                        <textarea rows="4" columns = "200" class = "textarea" name="textarea_script_margin" id="textarea_script_margin"></textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
     </div>
     <div class="row">
-            <div class="col-sm-6">
-            <p> crosstab index </p>
-            <textarea rows="4" columns = "200" class = "textarea" name="textarea_script_index" id="textarea_script_index"></textarea>
+        <div class="col-sm-6">
+            <div class = "bd-card">
+                <div class="card">
+                <h5 class="card-header"> crosstab index </h5>
+
+                <textarea rows="4" columns = "200" class = "textarea" name="textarea_script_index" id="textarea_script_index"></textarea>
+                </div>
             </div>
-            <div class="col-sm-6">
-            <p> crosstab columns </p>
-            <textarea rows="4" columns = "200" class = "textarea" name="textarea_script_columns" id="textarea_script_columns"></textarea>
+        </div>
+
+        <div class="col-sm-6">
+            <div class = "bd-card">
+                <div class="card">
+                <h5 class="card-header"> crosstab columns </h5>
+                <textarea rows="4" columns = "200" class = "textarea" name="textarea_script_columns" id="textarea_script_columns"></textarea>
+                </div>
             </div>
+        </div>
     </div>
     <div class="row">
-    <div class="col-sm-6">
-    <input type="submit">
+        <div class="col-sm-6">
+            <div class="card">
+                <input type="submit">
+            </div>
+        </div>
     </div>
+
     </form>
 
     </div>
-    </div>
+</div>
 
 
 

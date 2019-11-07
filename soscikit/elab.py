@@ -63,7 +63,7 @@ class Output():
                                     g[0],
                                     save=False,
                                     tipo=options_tipo_var)
-        data.to_html()
+
         data_non_tot = data.drop("Totale")
 
         """if lista_ordinale != False:
@@ -96,7 +96,7 @@ class Output():
         return render_template("monovariate/monovariate_plot.html",
                                operation_form=g,
                                chart_json=chart.to_json(),
-                               data=data.to_html(),
+                               data=data.to_html(classes="table table-striped"),
                                unique_values=unique_values,
                                options_tipo_var=options_tipo_var,
                                characteristic_values=characteristic_values
@@ -114,7 +114,7 @@ class Output():
                                     save=False,
                                     tipo="categoriale",
                                     lista_ordinale=options_categorical_list)
-        data.to_html()
+
         data_non_tot = data.drop("Totale")
 
         datatest = pd.DataFrame({"X": data_non_tot.index.values,
@@ -150,7 +150,7 @@ class Output():
         return render_template("monovariate/monovariate_plot.html",
                                operation_form=g,
                                chart_json=chart.to_json(),
-                               data=data.to_html(),
+                               data=data.to_html(classes="table table-striped"),
                                unique_values=unique_values, options_tipo_var=options_tipo_var,
                                characteristic_values=characteristic_values)
 
@@ -186,7 +186,7 @@ class Output():
         return render_template("bivariate/bivariate_plot.html",
                                operation_form=str((g_x, g_y)),
                                chart_json=chart.to_json(),
-                               correlation=correlation.to_html(),
+                               correlation=correlation.to_html(classes="table table-striped"),
                                img_link=img_link)
 
     def cluster_output(self, request, dataset, selected_file_link):
@@ -255,11 +255,16 @@ class Output():
     def ncrosstab_output(self, request, dataset):
         try:
             script = request.form["textarea_script"]
+            index_series = request.form["textarea_script_index"]
+            columns_series = request.form["textarea_script_columns"]
             self.script = script
+            self.index_series = index_series
+            self.columns_series = columns_series
         except:
             script = self.script
         data = dataset
         result = eval(script, {'data': data, "pd": pd})
+
 
         '''
         index = script.split("index=[")[1].split("]],")[0]
@@ -280,8 +285,18 @@ class Output():
 
         if result.index.nlevels == 1 & result.columns.nlevels == 1:
             abilitate_tipology = "abilitate"
+            stacked = result.stack().reset_index().rename(columns={0: 'value'})
+            print(stacked)
+            result_img = sns.barplot(x=stacked.columns[0], y=stacked.columns[2], hue=stacked.columns[1], data=stacked)
+            img_name = uuid.uuid4()
+            flask.session["img.png"] = img_name
+
+            plt.savefig("./static/images/{}.png".format(img_name))
+            plt.figure()
+            img_link = url_for("get_image", image_name="{}.png".format(img_name))
         else:
             abilitate_tipology = "disabilitate"
+            img_link = ""
 
         self.crosstab_session["ncrosstab_output"] = result.to_html(classes="draggable", table_id="corr_tab")
         self.crosstab_session["ncrosstab_output_margin"] = "pass"
@@ -290,7 +305,8 @@ class Output():
         return render_template("crosstab/crosstab_output.html",
                                table=result.to_html(classes="draggable",
                                                     table_id="corr_tab"),
-                               abilitate_tipology=abilitate_tipology)
+                               abilitate_tipology=abilitate_tipology,
+                               img_link=img_link)
 
     def ncrosstab_classification(self):
         result = self.crosstab_session["ncrosstab_output"]
@@ -335,7 +351,7 @@ class Output():
 
         if g.form["new_variabile"] == "":
             if isinstance(result, pd.Series):
-                return eval(g.form["formula"], {'data': data}).to_frame().to_html()
+                return eval(g.form["formula"], {'data': data}).to_frame().to_html(classes="table table-striped")
             elif not isinstance(result, pd.Series):
                 return eval(g.form["formula"], {'data': data})
         else:
@@ -387,7 +403,7 @@ class Operation():
 
         return render_template("recode/recode_operation.html",
                                operation_form=g,
-                               data=data.to_html(),
+                               data=data.to_html(classes="table table-striped"),
                                unique_values=unique_values,
 
                                )

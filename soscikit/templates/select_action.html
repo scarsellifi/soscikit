@@ -3,10 +3,6 @@
     {{ super() }}
     <style>
 
-    div.dataTables_wrapper {
-        width: auto;
-        margin: auto;
-    }
 
 
     </style>
@@ -44,17 +40,29 @@
                 -->
 
             <div class="col-sm-6">
-            <h3> first 500 rows </h3>
-                {{ html_data | safe}}
+                <div class = "bd-card">
+                    <div class="card">
+                        <h5 class="card-header"> first 500 rows </h5>
+                        <div class="card-body">
+                            {{ html_data | safe}}
+                        </div>
+                    </div>
+                </div>
             </div>
 
-                <div class="col-sm-6">
-                    <div id="action_description">
-                        <p> In this section of the software you can select the statistical / computational procedure you need. You can find the options available in the menu immediately above this content</p>
+            <div class="col-sm-6">
+
+                    <div class = "bd-card">
+                        <div class="card">
+                            <h5 class="card-header">description</h5>
+                            <div class="card-body" id="action_description">
+                                <p> In this section of the software you can select the statistical / computational procedure you need. You can find the options available in the menu immediately above this content</p>
+                            </div>
+                        </div>
                     </div>
 
 
-                </div>
+            </div>
         </div>
 
 
@@ -66,12 +74,14 @@
     <script>
     $(document).ready( function () {
     $('#head_data').DataTable(
-        {"scrollY": true,
-        "scrollX": true}
+        {"paging": false,
+        "scrollY": "400px",
+        "scrollX": "400px",}
     );
     } );
     </script>
     <script>
+
 
 
 

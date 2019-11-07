@@ -23,7 +23,7 @@ def altair_monovariate(data, options_tipo_var, lista_ordinale):
             text='Frequency:Q',
             tooltip=['X', 'Frequency']
         )
-        chart = (bars + text).properties(width=800, height=400).interactive()
+        chart = (bars + text).properties(width=400, height=300).interactive()
     elif options_tipo_var == "categoriale":
         bars = alt.Chart(datatest).mark_bar().encode(
             x=alt.X("X:N",
@@ -47,7 +47,7 @@ def altair_monovariate(data, options_tipo_var, lista_ordinale):
             text='Frequency:Q',
             tooltip=['X', 'Frequency']
         )
-        chart = (bars + text).properties(width=800, height=400).interactive()
+        chart = (bars + text).properties(width=400, height=300).interactive()
 
     elif lista_ordinale == True:
         bars = alt.Chart(datatest).mark_bar().encode(
@@ -67,7 +67,7 @@ def altair_monovariate(data, options_tipo_var, lista_ordinale):
             text='Frequency:Q',
             tooltip=['X', 'Frequency']
         )
-        chart = (bars + text).properties(width=800, height=400).interactive()
+        chart = (bars + text).properties(width=400, height=300).interactive()
 
     return chart
 
@@ -100,5 +100,5 @@ def altair_bivariate(dataset, g_x, g_y):
         color='degree:N'
     )
 
-    chart = (points + polynomial_fit).properties(width=800, height=400).interactive()
+    chart = (points + polynomial_fit).properties(width=400, height=300).interactive()
     return chart

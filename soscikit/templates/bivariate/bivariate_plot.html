@@ -16,23 +16,56 @@
 {% block content %}
 
 
-    <p>Selected variable: {{ operation_form }}</p>
+    <h1>Selected variable: {{ operation_form }}</h1>
 
-    <p> frequency table </p>
-    {{ data | safe }}
+    <div class = "row">
+        <div class = "col-6">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> Plot </h5>
+                    <div class="card-body">
+                        <div id="vis"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <p> Plot </p>
-    <div id="vis"></div>
+        <div class = "col-6">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> static plot with regression </h5>
+                    <div class="card-body">
+                        <img src="{{ img_link }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <div class = "col-6">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header"> Unique value for sorting ordinal values </h5>
+                    <div class="card-body">
+                        {{ unique_values | safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "col-6">
+                <div class = "bd-card">
+                    <div class="card">
+                        <h5 class="card-header"> Correlation </h5>
+                        <div class="card-body">
 
 
-    <p> Unique value for sorting ordinal values</p>
-    {{ unique_values | safe }}
 
-    <h3> static plot with regression</h3>
-    <img src="{{ img_link }}">
-
-    <h3> Correlation </h3>
-    {{ correlation | safe }}
+                            {{ correlation | safe }}
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
 
 </body>
 <script type="text/javascript">

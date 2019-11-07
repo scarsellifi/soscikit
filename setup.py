@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='SoSciKit',
-      version='0.2.3',
+      version='0.2.6',
       description='Social Science Kit - Open Source Software for Social Science',
       url='',
       author='Marco Scarselli',
@@ -20,6 +20,7 @@ setup(name='SoSciKit',
           "pandas_profiling",
           "altair",
           "xlrd==1.1.0",
-          "jupyter"
+          "jupyter",
+          "openpyxl"
       ],
       zip_safe=False)
