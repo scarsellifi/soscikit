@@ -1,5 +1,6 @@
 import webbrowser
 import os
+import numpy as np
 import pandas as pd
 from collections import OrderedDict
 # flask libraries
@@ -58,7 +59,7 @@ class Output():
             pass
 
         unique_values = dataset[g[0]].unique()
-
+        series = dataset[g[0]]
         data = table.dist_frequenza(dataset,
                                     g[0],
                                     save=False,
@@ -72,12 +73,17 @@ class Output():
         datatest = pd.DataFrame({"X": data_non_tot.index.values,
                                  "Frequency": data_non_tot["Frequenze"].values})
 
+        try:
+            gini = tools.gini(series.values)
+        except:
+            gini = np.nan
+
         equilibrium_values = tools.Sq_output(datatest["Frequency"])
         if options_tipo_var == "cardinale":
             characteristic_values = {
-                "mean": datatest["Frequency"].mean(),
-                "standard deviation": datatest["Frequency"].std(),
-                "gini index": tools.gini(datatest["Frequency"].values)
+                "mean": series.mean(),
+                "standard deviation": series.std(),
+                "gini index": str(gini)
 
             }
 
@@ -158,6 +164,7 @@ class Output():
         g = request
         g_x = g.form.getlist('bivariate_x')[0]
         g_y = g.form.getlist('bivariate_y')[0]
+        g_hue = "empty"
 
         print(g_x, g_y)
         try:
@@ -174,7 +181,29 @@ class Output():
         script = g.form["textarea_script"]
         print(script)
         plt.figure()
-        result = eval(script, {'data': data, "pd": pd, "sns": sns})
+
+        x_result = script.split('x="')[1].split('"')[0]
+        y_result = script.split('y="')[1].split('"')[0]
+        print(len(x_result))
+        print(len(y_result))
+
+        if len(x_result) > 35 or len(y_result) > 35:
+            try:
+                hue_result = script.split('hue="')[1].split('"')[0]
+                data_reduced = data[[x_result,y_result, hue_result]]
+                data_reduced.columns = ["x", "y", "hue"]
+                result = sns.lmplot(x="x",y="y",data=data_reduced,hue="hue")
+                g_hue = g.form.getlist('bivariate_hue')[0]
+            except:
+                data_reduced = data[[x_result, y_result, hue_result]]
+                data_reduced.columns = ["x", "y", "hue"]
+                result = sns.jointplot(x="x", y="y", data=data_reduced,kind="reg")
+
+        else:
+            result = eval(script, {'data': data, "pd": pd, "sns": sns})
+
+
+
         img_name = uuid.uuid4()
         flask.session["img.png"] = img_name
 
@@ -184,7 +213,7 @@ class Output():
 
         # maybe solution https://stackoverflow.com/questions/53268133/generate-image-on-the-fly-using-flask-and-matplotlib
         return render_template("bivariate/bivariate_plot.html",
-                               operation_form=str((g_x, g_y)),
+                               operation_form=[g_x, g_y, g_hue],
                                chart_json=chart.to_json(),
                                correlation=correlation.to_html(classes="table table-striped"),
                                img_link=img_link)

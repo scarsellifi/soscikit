@@ -74,8 +74,20 @@ input {float:left;}
 function showcontent(elem) {
         //var popup = document.getElementById("myPopup");
         //popup.classList.toggle("show")
-        console.log(elem.value);
+
         $("#nome_completo_variabile").text(elem.value);
+        /*
+        var cardinal = document.getElementById("cardinal");
+        var categorical = document.getElementById("categorical");
+        var check_type = elem.innerHTML.search(": object")
+        alert(check_type);
+        if (check_type != -1){
+            cardinal.checked=true;
+            categorical.disabled=true;
+        } else {
+            cardinal.disabled=false;
+            cardinal.checked=true;
+        } */
     }
 </script>
 <body>
