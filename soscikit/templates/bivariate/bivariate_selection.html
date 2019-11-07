@@ -134,6 +134,7 @@ function showcontent(elem) {
                                     {% for variable in variable_name_type_obj %}
                                         <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type_obj[ variable ]}} </option>
                                     {% endfor %}
+                                        <option onmouseover="showcontent(this)" value= "none">remove hue variable </option>
                                  </select>
                             </div>
                         </div>
@@ -224,14 +225,7 @@ function showcontent(elem) {
 
     <script>
 function save_on(elem, index) {
-    document.getElementById(index).innerHTML = "'" +  elem.value + "'";
-
-
-    /*if (index_element.childElementCount < 1) {
-    } else {
-        index_element.removeChild(index_element.childNodes[1]);
-    }*/
-
+    document.getElementById(index).innerHTML = '"' +  elem.value + '"';
 }
 
 
@@ -266,8 +260,9 @@ function create_script(){
     var index_concat = str.concat(str_index).substr(1);
     var columns_concat  = str.concat(str_columns).substr(1);
     var hue_concat  = str.concat(str_hue).substr(1);
-    if (hue_concat == ""){
-    var result = `sns.jointplot(x=${index_concat}, y=${columns_concat}, data=data, kind="reg")`;
+    var result;
+    if (hue_concat == '"none"'){
+    result = `sns.jointplot(x=${index_concat}, y=${columns_concat}, data=data, kind="reg")`;
     } else {
         result = `sns.lmplot(x=${index_concat}, y=${columns_concat}, data=data, hue=${hue_concat} )`
     }

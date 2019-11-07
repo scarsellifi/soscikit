@@ -235,7 +235,7 @@ function save_on_x(elem) {
     var node = document.createElement("LI");
     node.setAttribute("onclick", "autoremove(this)");
     node.setAttribute("id", "elem.value");
-    var textnode = document.createTextNode("data['" +  elem.value + "']");
+    var textnode = document.createTextNode('data["' +  elem.value + '"]');
     node.appendChild(textnode);
     document.getElementById("select_index").appendChild(node);
 
@@ -245,7 +245,7 @@ function save_on_y(elem) {
     var node = document.createElement("LI");
     node.setAttribute("onclick", "autoremove(this)");
     node.setAttribute("id", "elem.value");
-    var textnode = document.createTextNode("data['" +  elem.value + "']");
+    var textnode = document.createTextNode('data["' +  elem.value + '"]');
     node.appendChild(textnode);
     document.getElementById("select_columns").appendChild(node);
 }

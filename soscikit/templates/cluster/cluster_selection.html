@@ -191,7 +191,7 @@ function save_on_x(elem) {
     var node = document.createElement("LI");
     node.setAttribute("onclick", "autoremove(this)");
     node.setAttribute("id", "elem.value");
-    var textnode = document.createTextNode("'" +  elem.value + "'");
+    var textnode = document.createTextNode('"' +  elem.value + '"');
     node.appendChild(textnode);
     document.getElementById("select_index").appendChild(node);
 
