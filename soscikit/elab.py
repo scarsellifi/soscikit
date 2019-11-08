@@ -20,6 +20,8 @@ from mpl_toolkits.mplot3d import Axes3D
 from plotting.altarian import altair_monovariate, altair_bivariate
 import pandas_profiling
 import re
+from io import BytesIO
+import base64
 
 class Output():
     """output operation"""
@@ -204,19 +206,17 @@ class Output():
 
 
 
-        img_name = uuid.uuid4()
-        flask.session["img.png"] = img_name
+        figfile = BytesIO()
+        plt.savefig(figfile, format="png")
+        figfile.seek(0)  # rewind to beginning of file
+        figdata_png = base64.b64encode(figfile.getvalue())
 
-        plt.savefig("./static/images/{}.png".format(img_name))
-        plt.figure()
-        img_link = url_for("get_image", image_name="{}.png".format(img_name))
-
-        # maybe solution https://stackoverflow.com/questions/53268133/generate-image-on-the-fly-using-flask-and-matplotlib
         return render_template("bivariate/bivariate_plot.html",
                                operation_form=[g_x, g_y, g_hue],
                                chart_json=chart.to_json(),
                                correlation=correlation.to_html(classes="table table-striped"),
-                               img_link=img_link)
+                               #img_link=img_link,
+                               img=figdata_png.decode('utf8'))
 
     def cluster_output(self, request, dataset, selected_file_link):
         data = dataset
@@ -239,10 +239,9 @@ class Output():
         plt.figure()
         variabile = eval(script)[0]
         if len(variabile) == 2:
-            img_name = uuid.uuid4()
 
             c = output[nome_var]
-            flask.session["img.png"] = img_name
+
             for classes in c.unique():
                 output_temp = output[output[nome_var] == classes]
                 x = output_temp[variabile[0]]
@@ -251,15 +250,18 @@ class Output():
                 result = sns.scatterplot(x=x, y=y, data=output_temp, cmap="tab20c", label=classes)
                 result.legend()
 
-            # result.figure.savefig("./static/images/{}.png".format(img_name))
-            plt.savefig("./static/images/{}.png".format(img_name))
-            img_link = url_for("get_image", image_name="{}.png".format(img_name))
+
+            figfile = BytesIO()
+            plt.savefig(figfile, format="png")
+            figfile.seek(0)  # rewind to beginning of file
+            figdata_png = base64.b64encode(figfile.getvalue())
+
         elif len(variabile) == 3:
-            img_name = uuid.uuid4()
+
 
             c = output[nome_var]
 
-            flask.session["img.png"] = img_name
+
             result = plt.axes(projection='3d')
             for classes in c.unique():
                 output_temp = output[output[nome_var] == classes]
@@ -270,8 +272,10 @@ class Output():
                 result.scatter3D(x, y, z, cmap="tab20c", label=classes)
                 result.legend()
 
-            plt.savefig("./static/images/{}.png".format(img_name))
-            img_link = url_for("get_image", image_name="{}.png".format(img_name))
+            figfile = BytesIO()
+            plt.savefig(figfile, format="png")
+            figfile.seek(0)  # rewind to beginning of file
+            figdata_png = base64.b64encode(figfile.getvalue())
         else:
             img_link = ""
         output.to_excel(selected_file_link, index=False)
@@ -279,7 +283,7 @@ class Output():
         plt.figure()
 
 
-        return render_template("cluster/cluster_output.html", data=output, img_link=img_link)
+        return render_template("cluster/cluster_output.html", data=output, img=figdata_png.decode('utf8'))
 
     def ncrosstab_output(self, request, dataset):
         try:
@@ -317,12 +321,11 @@ class Output():
             stacked = result.stack().reset_index().rename(columns={0: 'value'})
             print(stacked)
             result_img = sns.barplot(x=stacked.columns[0], y=stacked.columns[2], hue=stacked.columns[1], data=stacked)
-            img_name = uuid.uuid4()
-            flask.session["img.png"] = img_name
 
-            plt.savefig("./static/images/{}.png".format(img_name))
-            plt.figure()
-            img_link = url_for("get_image", image_name="{}.png".format(img_name))
+            figfile = BytesIO()
+            plt.savefig(figfile, format="png")
+            figfile.seek(0)  # rewind to beginning of file
+            figdata_png = base64.b64encode(figfile.getvalue())
         else:
             abilitate_tipology = "disabilitate"
             img_link = ""
@@ -335,7 +338,7 @@ class Output():
                                table=result.to_html(classes="draggable",
                                                     table_id="corr_tab"),
                                abilitate_tipology=abilitate_tipology,
-                               img_link=img_link)
+                               img=figdata_png.decode('utf8'))
 
     def ncrosstab_classification(self):
         result = self.crosstab_session["ncrosstab_output"]

@@ -141,20 +141,21 @@ function showcontent(elem) {
 
                     <form action = "{{ url_for('cluster_output')}}" method = "POST", enctype="multipart/form-data" accept-charset="UTF-8">
                     <h3> select number of class</h3>
-                    <select id="cluster_class">
-                        <option name="number_of_class" value = 1>1</option>
-                        <option name="number_of_class" value = 2>2</option>
-                        <option name="number_of_class" value = 3>3</option>
-                        <option name="number_of_class" value = 4>4</option>
-                        <option name="number_of_class" value = 5>5</option>
-                        <option name="number_of_class" value = 6>6</option>
-                        <option name="number_of_class" value = 7>7</option>
-                        <option name="number_of_class" value = 8>8</option>
-                        <option name="number_of_class" value = 19>9</option>
-                    </select>
 
-                    <button class="btn btn-primary" onclick="create_script()"> generate python script for kmean cluster</button>
+                        <select id="cluster_class">
+                            <option name="number_of_class" value = 1>1</option>
+                            <option name="number_of_class" value = 2>2</option>
+                            <option name="number_of_class" value = 3>3</option>
+                            <option name="number_of_class" value = 4>4</option>
+                            <option name="number_of_class" value = 5>5</option>
+                            <option name="number_of_class" value = 6>6</option>
+                            <option name="number_of_class" value = 7>7</option>
+                            <option name="number_of_class" value = 8>8</option>
+                            <option name="number_of_class" value = 19>9</option>
+                        </select>
 
+                    </br>
+                    <button type="button" class="btn btn-primary" onclick="create_script()"> generate python script for kmean cluster</button>
 
 
 
