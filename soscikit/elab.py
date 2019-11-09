@@ -44,17 +44,7 @@ class Output():
             "options_tipo_var": options_tipo_var,
             #'options_categorical_list': options_ordinal_list
         }
-        """
-        if request.form["ordinal_list"] == "":
-            lista_ordinale = False
-        else:
-            lista_ordinale = request.form["ordinal_list"].split(",")
-            try:
-                lista_ordinale = [int(x) for x in lista_ordinale]
-            except:
-                lista_ordinale
-        print(lista_ordinale)
-        """
+
         if options_drop == "drop":
             dataset.dropna(subset=[g[0]], inplace=True)
         elif options_drop == "no_drop":
@@ -68,10 +58,6 @@ class Output():
                                     tipo=options_tipo_var)
 
         data_non_tot = data.drop("Totale")
-
-        """if lista_ordinale != False:
-            data.index = data.index.map(str)
-        """
         datatest = pd.DataFrame({"X": data_non_tot.index.values,
                                  "Frequency": data_non_tot["Frequenze"].values})
 
@@ -127,12 +113,10 @@ class Output():
 
         datatest = pd.DataFrame({"X": data_non_tot.index.values,
                                  "Frequency": data_non_tot["Frequenze"].values})
-        # print(datatest)
         datatest.dropna(inplace=True)
         datatest.set_index(datatest["X"], inplace=True)
         datatest.index = datatest.index.map(str)
         datatest = datatest.loc[options_categorical_list]
-        # print("{}{}".format(data.columns[0], ":Q"), "{}{}".format(data.columns[1], ":0"))
 
         equilibrium_values = tools.Sq_output(datatest["Frequency"])
         if options_tipo_var == "cardinale":
@@ -197,9 +181,9 @@ class Output():
                 result = sns.lmplot(x="x",y="y",data=data_reduced,hue="hue")
                 g_hue = g.form.getlist('bivariate_hue')[0]
             except:
-                data_reduced = data[[x_result, y_result, hue_result]]
-                data_reduced.columns = ["x", "y", "hue"]
-                result = sns.jointplot(x="x", y="y", data=data_reduced,kind="reg")
+                data_reduced = data[[x_result, y_result]]
+                data_reduced.columns = ["x", "y"]
+                result = sns.jointplot(x="x", y="y", data=data_reduced, kind="reg")
 
         else:
             result = eval(script, {'data': data, "pd": pd, "sns": sns})
@@ -210,6 +194,7 @@ class Output():
         plt.savefig(figfile, format="png")
         figfile.seek(0)  # rewind to beginning of file
         figdata_png = base64.b64encode(figfile.getvalue())
+        plt.figure()
 
         return render_template("bivariate/bivariate_plot.html",
                                operation_form=[g_x, g_y, g_hue],
