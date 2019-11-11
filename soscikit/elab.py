@@ -62,7 +62,7 @@ class Output():
                                  "Frequency": data_non_tot["Frequenze"].values})
 
         try:
-            gini = tools.gini(series.values)
+            gini = tools.gini(series)
         except:
             gini = np.nan
 

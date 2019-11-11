@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='SoSciKit',
-      version='0.2.6',
+      version='0.3.1',
       description='Social Science Kit - Open Source Software for Social Science',
       url='',
       author='Marco Scarselli',

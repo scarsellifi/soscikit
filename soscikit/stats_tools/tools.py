@@ -214,10 +214,14 @@ def Sq_output(series):
            "Sq": Sq(series),
            "Sq_Norm": Sq_norm(series)}
 
-def gini(array):
-    """Calculate the Gini coefficient of a numpy array."""
-    # based on bottom eq: http://www.statsdirect.com/help/content/image/stat0206_wmf.gif
-    # from: http://www.statsdirect.com/help/default.htm#nonparametric_methods/gini.htm
+def gini(series):
+    """Calculate the Gini coefficient of a pandas series."""
+    try:
+        array = series.apply(lambda x: float(x)).values
+    except:
+        return "all values must be integer or float"
+
+
     array = array.flatten() #all values are treated equally, arrays must be 1d
     if np.amin(array) < 0:
         array -= np.amin(array) #values cannot be negative

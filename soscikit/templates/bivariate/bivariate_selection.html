@@ -130,7 +130,7 @@ function showcontent(elem) {
                             <div class="card-body">
 
 
-                                <select onchange="save_on(this, 'selected_hue')" multiple="multiple" id='lstBox3' name="bivariate_hue" class="form-control">
+                                <select onchange="save_on(this, 'selected_hue')" multiple="multiple" id='lstBox3' name="bivariate_hue" class="form-control" required>
                                     {% for variable in variable_name_type_obj %}
                                         <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type_obj[ variable ]}} </option>
                                     {% endfor %}
