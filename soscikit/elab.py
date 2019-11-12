@@ -153,11 +153,7 @@ class Output():
         g_hue = "empty"
 
         print(g_x, g_y)
-        try:
-            data = dataset
-        except:
-            dataset = pd.read_excel("./static/uploads/" + flask.session["selected_file"])
-            data = dataset
+        data = dataset
 
 
         correlation = data[[g_x, g_y]].corr()
@@ -340,22 +336,22 @@ class Output():
         return render_template("crosstab/crosstab_classification_output.html",
                                table= dataset.to_html(table_id = "result_data"))
 
-    def recode_output(self, request, dataset):
+    def recode_output(self, request, obj_elab):
         g = request.values.to_dict()
         new_var_name = g["new_variabile_name"]
-        recode_var = flask.session["recode_var"]
-        print(recode_var[0])
-        dataset = pd.read_excel("./static/uploads/" + flask.session["selected_file"])
+        print(g)
+        recode_var = obj_elab.recode_var
 
+        print(recode_var[0])
+        dataset = obj_elab.dataset
         def recode(dictionary, x):
             try:
                 return dictionary[x]
             except:
                 return x
 
-        dataset[new_var_name] = dataset[recode_var[0]].apply(lambda x: recode(g, x))
-        dataset.to_excel("./static/uploads/" + flask.session["selected_file"], index=False)
-
+        dataset[new_var_name] = dataset[recode_var[0]].apply(lambda x: recode(g, str(x)))
+        dataset.to_excel(obj_elab.selected_file_link, index=False)
         output = dataset.to_html(table_id="result_data")
         return render_template("cluster/cluster_output.html", data=output)
 
@@ -405,12 +401,12 @@ class Operation():
                                selected_file=obj_elab.selected_file,
                                html_data=html_data)
 
-    def recode_operation(self, request, dataset):
+    def recode_operation(self, request, obj_elab):
         g = request.form.getlist('recode_var')
         self.recode_session["recode_var"] = g
-        flask.session["recode_var"] = g
+        obj_elab.recode_var = g
 
-        dataset = pd.read_excel("./static/uploads/" + flask.session["selected_file"])
+        dataset = obj_elab.dataset
         unique_values = dataset[g[0]].unique()
 
         data = table.dist_frequenza(dataset,
@@ -498,23 +494,23 @@ class Elab():
             return render_template("index.html", files=files, upload="removed")
         else:
             if g.form["file_config"] == "standard_excel":
-                flask.session["selected_file"] = g.form["load"]
+                #flask.session["selected_file"] = g.form["load"]
                 dataset = pd.read_excel("./static/uploads/" + g.form["load"])
             elif g.form["file_config"] == "excel_google_form":
                 dataset = pd.read_excel("./static/uploads/" + g.form["load"])
                 dataset = dataset.applymap(lambda x: tools.google_form_likert(x))
                 dataset.to_excel("./static/uploads/" + "__gform__" + g.form["load"])
-                flask.session["selected_file"] = "__gform__" + g.form["load"]
+                #flask.session["selected_file"] = "__gform__" + g.form["load"]
             elif g.form["file_config"] == "csv1":
                 dataset = pd.read_csv("./static/uploads/" + g.form["load"], sep=";")
                 dataset.to_excel("./static/uploads/" + g.form["load"] + ".xlsx")
-                flask.session["selected_file"] = g.form["load"] + ".xlsx"
+                #flask.session["selected_file"] = g.form["load"] + ".xlsx"
             elif g.form["file_config"] == "csv2":
                 dataset = pd.read_csv("./static/uploads/" + g.form["load"], sep=",")
                 dataset.to_excel("./static/uploads/" + g.form["load"] + ".xlsx")
-                flask.session["selected_file"] = g.form["load"] + ".xlsx"
+                #flask.session["selected_file"] = g.form["load"] + ".xlsx"
             elif g.form["file_config"] == "create_subset":
-                flask.session["selected_file"] = g.form["load"]
+                #flask.session["selected_file"] = g.form["load"]
                 dataset = pd.read_excel("./static/uploads/" + g.form["load"])
                 self.variable_name_type.update(dataset.dtypes.to_dict(into=OrderedDict))
                 self.dataset = dataset

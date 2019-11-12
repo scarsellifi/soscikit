@@ -4,7 +4,7 @@
 def main():
 
     import os
-    from flask import Flask, request, render_template, url_for, redirect, send_from_directory
+    from flask import Flask, request, render_template, url_for, redirect, send_from_directory, abort
     import flask
     import matplotlib as mpl
     mpl.use('Agg')
@@ -100,7 +100,12 @@ def main():
     ## plot and operation
     @app.route('/monovariate_plot', methods=['GET', 'POST'])
     def monovariate_plot():
-        return obj_elab.output.monovariate_plot(request, obj_elab.dataset)
+        try:
+            return obj_elab.output.monovariate_plot(request, obj_elab.dataset)
+        except:
+            return '''<h1><b>ERROR:</b> maybe you uses categorical data for cardinal
+             analysis? re-try with different variable. If it doesn't work,
+              please <a href="https://github.com/scarsellifi/soscikit/issues"> open issues on github </a></h1>'''
 
     @app.route('/set_monovariate_plot_sorted', methods=["GET", 'POST'])
     def set_monovariate_plot_sorted():
@@ -114,11 +119,11 @@ def main():
 
     @app.route('/recode_operation', methods=['GET', 'POST'])
     def recode_operation():
-        return obj_elab.operation.recode_operation(request, obj_elab.dataset)
+        return obj_elab.operation.recode_operation(request, obj_elab)
 
     @app.route('/recode_output', methods=['GET', 'POST'])
     def recode_output():
-        return obj_elab.output.recode_output(request, obj_elab.dataset)
+        return obj_elab.output.recode_output(request, obj_elab)
 
     @app.route('/bivariate_plot', methods=['GET', 'POST'])
     def bivariate_plot():
@@ -155,7 +160,7 @@ def main():
     def profiling_output():
         return obj_elab.output.profiling_output(obj_elab)
 
-
+    '''
     @app.route("/get-image/<image_name>")
     def get_image(image_name):
         try:
@@ -163,7 +168,7 @@ def main():
                                        as_attachment=False)
         except FileNotFoundError:
             abort(404)
-
+    '''
     @app.route("/jupyter")
     def jupyter():
         import webbrowser
