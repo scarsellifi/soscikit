@@ -186,7 +186,7 @@ class Output():
                 result = sns.lmplot(x="x",y="y",data=data_reduced,hue="hue")
                 g_hue = g.form.getlist('bivariate_hue')[0]
 
-                chart = altair_bivariate_hue(data_reduced, "x", "y", "hue")
+                #chart = altair_bivariate_hue(data_reduced, "x", "y", "hue")
             except:
                 data_reduced = data[[x_result, y_result]]
                 data_reduced.columns = ["x", "y"]
