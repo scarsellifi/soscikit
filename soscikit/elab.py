@@ -17,7 +17,7 @@ import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from plotting.altarian import altair_monovariate, altair_bivariate
+from plotting.altarian import altair_monovariate_bar, altair_monovariate_hist, altair_bivariate
 import pandas_profiling
 import re
 from io import BytesIO
@@ -85,7 +85,14 @@ class Output():
 
             }
 
-        chart = altair_monovariate(data=datatest, options_tipo_var=options_tipo_var, lista_ordinale=False)
+        print(options_tipo_var)
+        if options_tipo_var == "categoriale" or options_tipo_var == "ordinale":
+            chart = altair_monovariate_bar(data=datatest, options_tipo_var=options_tipo_var, lista_ordinale=False)
+            print(chart.to_json())
+        elif options_tipo_var == "cardinale":
+            print(dataset[g[0]])
+            chart = altair_monovariate_hist(dataset, g[0])
+            print(chart.to_json())
 
         return render_template("monovariate/monovariate_plot.html",
                                operation_form=g,
@@ -111,33 +118,35 @@ class Output():
 
         data_non_tot = data.drop("Totale")
 
-        datatest = pd.DataFrame({"X": data_non_tot.index.values,
+        dataset_dist_plot = pd.DataFrame({"X": data_non_tot.index.values,
                                  "Frequency": data_non_tot["Frequenze"].values})
-        datatest.dropna(inplace=True)
-        datatest.set_index(datatest["X"], inplace=True)
-        datatest.index = datatest.index.map(str)
-        datatest = datatest.loc[options_categorical_list]
+        dataset_dist_plot.dropna(inplace=True)
+        dataset_dist_plot.set_index(dataset_dist_plot["X"], inplace=True)
+        dataset_dist_plot.index = dataset_dist_plot.index.map(str)
+        dataset_dist_plot = dataset_dist_plot.loc[options_categorical_list]
 
-        equilibrium_values = tools.Sq_output(datatest["Frequency"])
+        equilibrium_values = tools.Sq_output(dataset_dist_plot["Frequency"])
         if options_tipo_var == "cardinale":
             characteristic_values = {
-                "mean": datatest["Frequency"].mean(),
-                "standard deviation": datatest["Frequency"].std(),
-                "gini index": tools.gini(datatest["Frequency"].values)
+                "mean": dataset_dist_plot["Frequency"].mean(),
+                "standard deviation": dataset_dist_plot["Frequency"].std(),
+                "gini index": tools.gini(dataset_dist_plot["Frequency"].values)
 
             }
 
         if options_tipo_var == "categoriale":
             characteristic_values = {
-                "mode": datatest[datatest["Frequency"] == datatest["Frequency"].max()]["X"].values[0],
-                "total equilibrium": datatest["Frequency"].sum() / len(datatest["Frequency"].unique()),
+                "mode": dataset_dist_plot[dataset_dist_plot["Frequency"] == dataset_dist_plot["Frequency"].max()]["X"].values[0],
+                "total equilibrium": dataset_dist_plot["Frequency"].sum() / len(dataset_dist_plot["Frequency"].unique()),
                 "Sq": equilibrium_values["Sq"],
                 "Sq_norm": equilibrium_values["Sq_Norm"],
                 "Eq": equilibrium_values["Eq"]
 
             }
-        chart = altair_monovariate(data=datatest, options_tipo_var=options_tipo_var,
-                                   lista_ordinale=options_categorical_list)
+        chart = altair_monovariate_bar(data=dataset_dist_plot, options_tipo_var=options_tipo_var,
+                                       lista_ordinale=options_categorical_list)
+
+
 
         return render_template("monovariate/monovariate_plot.html",
                                operation_form=g,
@@ -176,6 +185,8 @@ class Output():
                 data_reduced.columns = ["x", "y", "hue"]
                 result = sns.lmplot(x="x",y="y",data=data_reduced,hue="hue")
                 g_hue = g.form.getlist('bivariate_hue')[0]
+
+                chart = altair_bivariate_hue(data_reduced, "x", "y", "hue")
             except:
                 data_reduced = data[[x_result, y_result]]
                 data_reduced.columns = ["x", "y"]

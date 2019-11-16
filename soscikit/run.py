@@ -100,12 +100,8 @@ def main():
     ## plot and operation
     @app.route('/monovariate_plot', methods=['GET', 'POST'])
     def monovariate_plot():
-        try:
-            return obj_elab.output.monovariate_plot(request, obj_elab.dataset)
-        except:
-            return '''<h1><b>ERROR:</b> maybe you uses categorical data for cardinal
-             analysis? re-try with different variable. If it doesn't work,
-              please <a href="https://github.com/scarsellifi/soscikit/issues"> open issues on github </a></h1>'''
+        return obj_elab.output.monovariate_plot(request, obj_elab.dataset)
+
 
     @app.route('/set_monovariate_plot_sorted', methods=["GET", 'POST'])
     def set_monovariate_plot_sorted():

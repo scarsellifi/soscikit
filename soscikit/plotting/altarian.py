@@ -3,28 +3,9 @@ import pandas as pd
 import numpy as np
 
 
-def altair_monovariate(data, options_tipo_var, lista_ordinale):
+def altair_monovariate_bar(data, options_tipo_var, lista_ordinale):
     datatest = data
-    if options_tipo_var == "cardinale":
-        bars = alt.Chart(datatest).mark_bar().encode(
-            x="X:N",
-            y="Frequency"
-        ).encode(
-            tooltip=['X', 'Frequency']
-        )
-        text = bars.mark_text(
-            align='left',
-            baseline='middle',
-            color="blue",
-            fontSize=20,
-            dx=0,  # Nudges text to right so it doesn't appear on top of the bar
-            dy=-7
-        ).encode(
-            text='Frequency:Q',
-            tooltip=['X', 'Frequency']
-        )
-        chart = (bars + text).properties(width=400, height=300).interactive()
-    elif options_tipo_var == "categoriale":
+    if options_tipo_var == "categoriale":
         bars = alt.Chart(datatest).mark_bar().encode(
             x=alt.X("X:N",
                     sort=alt.EncodingSortField(
@@ -71,6 +52,15 @@ def altair_monovariate(data, options_tipo_var, lista_ordinale):
 
     return chart
 
+
+def altair_monovariate_hist(data, column):
+    histogram = alt.Chart(data).mark_bar().properties(width=400, height=300).encode(
+        x=alt.X(column + ":Q", bin=True),
+        y='count()'
+    )
+    chart = histogram
+    return chart
+
 def altair_bivariate(dataset, g_x, g_y):
 
 
@@ -101,4 +91,18 @@ def altair_bivariate(dataset, g_x, g_y):
     )
 
     chart = (points + polynomial_fit).properties(width=400, height=300).interactive()
+    return chart
+
+def altair_bivariate_hue(dataset, g_x, g_y, g_hue):
+
+
+    dataset = dataset.dropna(subset=[g_x, g_y, g_hue])
+
+    points = alt.Chart(dataset).mark_point().encode(
+        x=g_x,
+        y=g_y,
+        color=g_hue
+    ).interactive()
+
+    chart = points.properties(width=400, height=300).interactive()
     return chart
