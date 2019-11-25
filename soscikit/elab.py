@@ -490,7 +490,7 @@ class Elab():
     output = Output()
     operation = Operation()
 
-    def load(self, request):
+    def load(self, request, descriptions):
         g = request
         self.selected_file = g.form["load"]
         self.action_to_file = g.form["file_config"]
@@ -540,7 +540,8 @@ class Elab():
             self.html_data = html_data
             return render_template("select_action.html",
                                    selected_file=self.selected_file,
-                                   html_data=html_data)
+                                   html_data=html_data,
+                                   descriptions = descriptions)
 
 
 
