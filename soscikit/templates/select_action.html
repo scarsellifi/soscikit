@@ -15,30 +15,6 @@
 
         <div class="row">
 
-
-            <!--
-            <div class="col-sm-6">
-            <form action = "{{url_for('action')}}" method = "POST">
-
-
-                <p> Select type action  </p>
-                <input type="radio" onclick="alert('this action could take a few minutes')" onmouseover="display_description('profiling')" name="select_action" value="profiling"> profiling <br>
-                <input type="radio" name="select_action" value="calc" onmouseover="display_description('calc')"> compute<br>
-                <input type="radio" name="select_action" value="recode" onmouseover="display_description('recode')"> recode <br>
-                <input type="radio" name="select_action" value="monovariate" onmouseover="display_description('monovariate')" checked> monovariate <br>
-                <input type="radio" name="select_action" value="multi cross tab" onmouseover="display_description('crosstab')"> crosstab and typological classification <br>
-                <input type="radio" name="select_action" value="bivariate_and_regression" onmouseover="display_description('bivariate')">bivariate_and_regression<br>
-                <input type="radio" name="select_action" value="k-mean" onmouseover="display_description('kmeans')"> k-mean classification <br>
-
-                <p>file status = {{ selected_file }} </p>
-
-
-                <input type="submit">
-                </form>
-
-                </div>
-                -->
-
             <div class="col-sm-6">
                 <div class = "bd-card">
                     <div class="card">
@@ -52,14 +28,11 @@
 
             <div class="col-sm-6">
 
-                    <div class = "bd-card">
-                        <div class="card">
-                            <h5 class="card-header">description</h5>
-                            <div class="card-body" id="action_description">
-                                <p> In this section of the software you can select the statistical / computational procedure you need. You can find the options available in the menu immediately above this content</p>
-                            </div>
-                        </div>
-                    </div>
+                <div id="action_description">
+                </div>
+
+
+
 
 
             </div>
@@ -112,8 +85,14 @@
         }
     }
 
+    window.onload = function(){
+        document.getElementById("action_description").innerHTML = general;
+    }
 
-    var pandas_profiling = ` <h2> profiling </h2>
+    var pandas_profiling=`{{ descriptions["pandas_profiling"] | safe}}`;
+
+
+    /*` <h2> profiling </h2>
     <p> For each column the following statistics - if relevant for the column type - are presented in an interactive HTML report:</p>
 
     <ul>
@@ -125,52 +104,30 @@
     <li>Correlations highlighting of highly correlated variables, Spearman, Pearson and Kendall matrices </li>
     <li>Missing values matrix, count, heatmap and dendrogram of missing values </li>
     </ul>
-    <p> imported from pandas-profiling library </p>`;
+    <p> imported from pandas-profiling library </p>`;*/
 
 
-    var monovariate = `<h2> monovariate </h2>
-    <p>Monovariate or Univariate analysis is the simplest form of analyzing data. “Uni” means “one”,
-    so in other words your data has only one variable. It doesn’t deal with causes or relationships
-    (unlike regression) and it’s major purpose is to describe; it takes data, summarizes that data and finds patterns
-    in the data. </p>
-    <ul>
-    <li> Frequency Distribution Tables.</li>
-    <li> Bar Charts </li>
-    <li> characteristic values </li>
-        <ul>
-        <li>Mode</li>
-        <li>Mean</li>
-        <li>Total equilibrium</li>
-        <li>Sqilibrium </li>
-        <li>Sqilibrium norm</li>
-        <li>Equilibrium norm</li>
-        <li>Standard deviation</li>
-        <li>Gini Index</li>
-        </ul>
-    `;
+    var monovariate = `{{ descriptions["monovariate"] | safe}}`;
 
-    var bivariate = `<h2> bivariate and regression </h2>
-<p> Bivariate analysis involves the analysis of two variables for the purpose of determining the empirical relationship between them.</p>
-<ul>
-<li> scatterplot with regression line </li>
-</ul>`;
+    var bivariate = `{{ descriptions["bivariate"] | safe}}`;
 
-    var crosstab = `<h2> crosstab and typological classification</h2>
-<p>A crosstab is a table showing the relationship between two or more variables. Where the table only shows the relationship between two categorical variables. </P>
-`;
+    var crosstab = `{{ descriptions["crosstab"] | safe}}`;
 
-    var kmeans = `<h2> k-means </h2>
-<p> k-means clustering aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean. </p>`;
+    var kmeans = `{{ descriptions["kmeans"] | safe}}`;
 
+    var compute = `{{ descriptions["compute"] | safe}}`;
 
-    var compute = `<h2> compute </h2>
-<p> compute a new variable based on existing information (from other variables) </p>`;
-    var recode = `<h2> recode </h2>
-<p> transform a variable by grouping its categories together. </p>`;
+    var recode = `{{ descriptions["recode"] | safe}}`;
 
-    var general =  `In this section of the software you can select the statistical / computational procedure you need.
-    You can find the options available in the menu immediately above this content
-    `
+    var general = `<div class = "bd-card">
+                        <div class="card">
+                            <h1 class="card-header">Description</h1>
+                            <div class="card-body" >
+                            <p>In this section of the software you can select the statistical / computational procedure you need.
+                                You can find the options available in the menu immediately above this content </p>
+                            </div>
+                        </div>
+                    </div>`;
 
     </script>
 

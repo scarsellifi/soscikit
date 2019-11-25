@@ -1,0 +1,248 @@
+{% extends "layout.html" %}
+
+{% block title %}Guide{% endblock %}
+{% block head %}
+    {{ super() }}
+
+    <style>
+    #action_nav {
+    display: none;
+    }
+    .sticky-top {
+    top: 100px; /* height of header */
+}
+    pre  {
+        display: block;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid
+        rgba(0,0,0,.125);
+        border-radius: .25rem;
+
+    }
+
+    </style>
+
+    <!-- add after bootstrap.min.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"/>
+    <!-- add after bootstrap.min.js -->
+    <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+{% endblock %}
+
+{% block content %}
+<body data-spy="scroll" data-target="#toc">
+
+
+<div class="container">
+
+
+    <div class="row">
+            <div class="col">
+                <div class="jumbotron">
+                  <h1 class="display-4">SoSciKit - GUIDE</h1>
+                  <p class="lead">Social Science Kit - Open Source Software for Social Science</p>
+                  <hr class="my-4">
+                  <p>SoSciKit is a web application for simplified data analysis based on Python scientific libraries and Flask.
+                      The web application allows to use the python libraries through a
+                      graphical interface even to those who do not know
+                      programming language.</p>
+                </div>
+            </div>
+    </div>
+    <div class = "row">
+        <div class="col-3 sticky-top">
+            <div class = "bd-card">
+                <div class="card">
+                    <h5 class="card-header">Table of content</h5>
+                    <div class="card-body">
+
+                            <nav id="toc" data-toggle="toc"></nav>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+                <div class = "bd-card">
+                        <div class="card">
+                            <h1 class="card-header">description</h1>
+                            <div class="card-body" >
+                                <p> SoSciKit is a web application for simplified data analysis based on Python scientific libraries and Flask.
+                                The web application allows to use the python libraries through a graphical interface even to those who do
+                                not know programming language. At the moment the application allows to perform monovariate, bivariate,
+                                cross tabulation and k-mean classification operations. In addition, it allows to recode categorical
+                                variables and create typologies. </p>
+
+                                <p> Graphical User Interface </p>
+                                <img src="{{ url_for('static',filename='images/1page.jpg') }}" class="img-fluid" alt="first page"/>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                <div class = "bd-card">
+                        <div class="card">
+                            <h1 class="card-header">Installation and dependencies</h1>
+                            <div class="card-body" >
+                                <p> You need a python interpeter installed on PC / Server. You need Python 3 (tested 3.6 - 3.7) to run this package. Other dependencies can be found in the requirements files </p>
+
+                                <h5> Using pip </h5>
+
+                                <p> You can install using the pip package manager by running </p>
+
+
+                                    <code> pip3.x install soscikit </code>
+
+
+                                    <h5> Usage </h5>
+
+                                <p> You can start SoScikit by running</p>
+
+
+                                    <code> python3.x -m soscikit </code>
+
+
+                                <p> it's start server and open your browser on localhost http://127.0.0.1:5555/</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "bd-card">
+                        <div class="card">
+                            <h1 class="card-header">How to contribute</h1>
+                            <div class="card-body" >
+                                <p> The package is actively maintained and developed as open-source software. If SoSciKit was helpful or
+                                interesting to you, you might want to get involved. There are several ways of contributing and helping.
+                                If you would like to be a industry partner or sponsor, please drop us a line.  </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "bd-card">
+                        <div class="card">
+                            <h1 class="card-header">Demo</h1>
+                            <div class="card-body" >
+                                <p> You can try a <a href="https://soscikit.eu.pythonanywhere.com/"> DEMO </a> </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+        {% for element in descriptions %}
+            {{ descriptions[element] | safe }}
+        {% endfor %}
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+    <script>
+    $(document).ready( function () {
+    $('#head_data').DataTable(
+        {"paging": false,
+        "scrollY": "400px",
+        "scrollX": "400px",}
+    );
+    } );
+    </script>
+    <script>
+
+    document.body.onload = addElement;
+    function addElement () {
+          // create a new div element
+        var currentDiv = document.getElementById("div1");
+        for (var item of operation){
+              var newDiv = document.createElement("div");
+              // and give it some content
+              var newContent = document.createElement(item);
+              // add the text node to the newly created div
+              newDiv.appendChild(newContent);
+
+
+              }
+
+          // add the newly created element and its content into the DOM
+
+              currentDiv.insertBefore(newDiv, currentDiv.childNodes[0]);
+          }
+
+
+    var pandas_profiling = ` <h2> profiling </h2>
+    <p> For each column the following statistics - if relevant for the column type - are presented in an interactive HTML report:</p>
+
+    <ul>
+    <li>Essentials: type, unique values, missing values </li>
+    <li>Quantile statistics like minimum value, Q1, median, Q3, maximum, range, interquartile range </li>
+    <li>Descriptive statistics like mean, mode, standard deviation, sum, median absolute deviation, coefficient of variation, kurtosis, skewness </li>
+    <li>Most frequent values </li>
+    <li>Histogram </li>
+    <li>Correlations highlighting of highly correlated variables, Spearman, Pearson and Kendall matrices </li>
+    <li>Missing values matrix, count, heatmap and dendrogram of missing values </li>
+    </ul>
+    <p> imported from pandas-profiling library </p>`;
+
+
+    var monovariate = `<h2> monovariate </h2>
+
+    `;
+
+    var bivariate = `<h2> bivariate and regression </h2>
+<p> Bivariate analysis involves the analysis of two variables for the purpose of determining the empirical relationship between them.</p>
+<ul>
+<li> scatterplot with regression line </li>
+</ul>`;
+
+    var crosstab = `<h2> crosstab and typological classification</h2>
+<p>A crosstab is a table showing the relationship between two or more variables. Where the table only shows the relationship between two categorical variables. </P>
+`;
+
+    var kmeans = `<h2> k-means </h2>
+<p> k-means clustering aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean. </p>`;
+
+
+    var compute = `<h2> compute </h2>
+<p> compute a new variable based on existing information (from other variables) </p>`;
+    var recode = `<h2> recode </h2>
+<p> transform a variable by grouping its categories together. </p>`;
+
+    var general =  `In this section of the software you can select the statistical / computational procedure you need.
+    You can find the options available in the menu immediately above this content
+    `
+
+    var operation = [pandas_profiling, monovariate, bivariate, crosstab, kmeans, compute, recode, general];
+    </script>
+
+
+</body>
+{% endblock %}
+
+
+
+
+
+

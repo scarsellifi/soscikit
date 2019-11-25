@@ -9,6 +9,7 @@ def main():
     import matplotlib as mpl
     mpl.use('Agg')
     from elab import Elab
+    from description import Description
 
 
 
@@ -31,6 +32,13 @@ def main():
         files = os.listdir("./static/uploads/")
         return render_template("index.html", files=files, upload="initial")
 
+    @app.route("/guide", methods=['GET'])
+    def guide():
+        return render_template("guide.html",
+                               descriptions = Description.guide,
+
+                               )
+
     @app.route('/upload_file', methods=['GET', 'POST'])
     def upload_file():
         if request.method == 'POST':
@@ -46,11 +54,11 @@ def main():
     def load():
         #return obj_elab.operation.load(request, obj_elab)
         try:
-            return obj_elab.load(request)
+            return obj_elab.load(request, Description.guide)
         except:
             request.form = {"load": obj_elab.selected_file,
                          "file_config": obj_elab.action_to_file}
-            return obj_elab.load(request)
+            return obj_elab.load(request, Description.guide)
     @app.route("/create_subset", methods=['POST'])
     def create_subset():
         return obj_elab.operation.create_subset(obj_elab.dataset)
