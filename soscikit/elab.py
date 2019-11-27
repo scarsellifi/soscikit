@@ -52,10 +52,20 @@ class Output():
 
         unique_values = dataset[g[0]].unique()
         series = dataset[g[0]]
+
         data = table.dist_frequenza(dataset,
                                     g[0],
                                     save=False,
                                     tipo=options_tipo_var)
+
+        if options_tipo_var == "cardinale":
+            dataset_cardinale = dataset.round(2)
+            data = table.dist_frequenza(dataset_cardinale,
+                                        g[0],
+                                        save=False,
+                                        tipo=options_tipo_var)
+
+
 
         data_non_tot = data.drop("Totale")
         datatest = pd.DataFrame({"X": data_non_tot.index.values,
@@ -130,7 +140,8 @@ class Output():
             print(chart.to_json())
         elif options_tipo_var == "cardinale":
             print(dataset[g[0]])
-            chart = altair_monovariate_hist(dataset, g[0])
+            dataset_hist = dataset.round(2)
+            chart = altair_monovariate_hist(dataset_hist, g[0])
             print(chart.to_json())
 
         return render_template("monovariate/monovariate_plot.html",
