@@ -90,12 +90,13 @@ function showcontent(elem) {
          <form action = "{{url_for('bivariate_plot')}}" method = "POST", id="form", enctype="multipart/form-data" accept-charset="UTF-8">
 
             <h1> bivariate selection </h1>
+            <button onclick="help()" type="button" class="btn btn-info"> step by step guide </button>
 
             <div class = "row">
                 <div class = "col-4">
-                    <div class = "bd-card">
+                    <div class = "bd-card" data-intro='Select X variable'>
                         <div class="card">
-                            <h5 class="card-header"> X Variable </h5>
+                            <h5 class="card-header" > X Variable </h5>
                             <div class="card-body">
 
                                <select onchange="save_on(this, 'selected_index')" multiple="multiple"  id='lstBox1' name="bivariate_x" class="form-control">
@@ -109,9 +110,9 @@ function showcontent(elem) {
                     </div>
                 </div>
                 <div class = "col-4">
-                    <div class = "bd-card">
+                    <div class = "bd-card" data-intro='Select Y variable'>
                         <div class="card">
-                            <h5 class="card-header"> Y Variable </h5>
+                            <h5 class="card-header" > Y Variable </h5>
                             <div class="card-body">
                             <select onchange="save_on(this, 'selected_columns')" multiple="multiple" id='lstBox2', name="bivariate_y" class="form-control">
                                    {% for variable in variable_name_type %}
@@ -124,9 +125,9 @@ function showcontent(elem) {
                     </div>
                 </div>
                 <div class = "col-4">
-                    <div class = "bd-card">
+                    <div class = "bd-card" data-intro='Optionally select hue variable'>
                         <div class="card">
-                            <h5 class="card-header"> Hue Variable </h5>
+                            <h5 class="card-header" > Hue Variable </h5>
                             <div class="card-body">
 
 
@@ -134,7 +135,7 @@ function showcontent(elem) {
                                     {% for variable in variable_name_type_obj %}
                                         <option onmouseover="showcontent(this)" value= "{{variable}}">{{ variable }} :  {{variable_name_type_obj[ variable ]}} </option>
                                     {% endfor %}
-                                        <option onmouseover="showcontent(this)" value= "none">remove hue variable </option>
+                                        <option onmouseover="showcontent(this)" value= "none" selected>remove hue variable </option>
                                  </select>
                             </div>
                         </div>
@@ -181,7 +182,7 @@ function showcontent(elem) {
 
 
 
-                    <button type="button" onclick="create_script()"> generate python script for bivariate </button>
+                    <button type="button" class="btn btn-primary" onclick="create_script()" data-intro='Generate python script'> generate python script for bivariate </button>
 
 
 
@@ -203,8 +204,7 @@ function showcontent(elem) {
                     <div >
                     <p> hue on variable </p>
                     <ul id="select_hue">
-                        <li id="selected_hue">
-                        </li>
+                        <li id="selected_hue">"none"</li>
 
                     </ul>
                     </div>
@@ -216,7 +216,7 @@ function showcontent(elem) {
                             </div>
 
                     </div>
-                    <input type="submit">
+                    <input type="submit" data-intro='Send request to server to visualize result' class="btn btn-primary">
                     </div>
                 </div>
          </div>
@@ -271,6 +271,10 @@ function create_script(){
 
 
 
+}
+
+function help() {
+    introJs().start();
 }
 
 </script>
