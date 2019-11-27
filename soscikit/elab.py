@@ -61,6 +61,27 @@ class Output():
         datatest = pd.DataFrame({"X": data_non_tot.index.values,
                                  "Frequency": data_non_tot["Frequenze"].values})
 
+        if options_tipo_var == "likert":
+            options_categorical_list = ["1", "2", "3", "4", "5"]
+            data = table.dist_frequenza(dataset,
+                                    g[0],
+                                    save=False,
+                                    tipo="ordinale",
+                                    lista_ordinale=[1,2,3,4,5])
+
+
+            data_non_tot = data.drop("Totale")
+
+            dataset_dist_plot = pd.DataFrame({"X": data_non_tot.index.values,
+                                              "Frequency": data_non_tot["Frequenze"].values})
+            dataset_dist_plot.dropna(inplace=True)
+            dataset_dist_plot.set_index(dataset_dist_plot["X"], inplace=True)
+            dataset_dist_plot.index = dataset_dist_plot.index.map(str)
+            dataset_dist_plot = dataset_dist_plot.loc[options_categorical_list]
+            dataset_dist_plot.fillna(0, inplace = True)
+            dataset_dist_plot.X = dataset_dist_plot.index
+            print(dataset_dist_plot)
+
         try:
             gini = tools.gini(series)
         except:
@@ -75,8 +96,21 @@ class Output():
 
             }
 
-        if options_tipo_var == "categoriale":
+        elif options_tipo_var == "categoriale":
             characteristic_values = {
+                "mode": datatest[datatest["Frequency"] == datatest["Frequency"].max()]["X"].values[0],
+                "total equilibrium": datatest["Frequency"].sum() / len(datatest["Frequency"].unique()),
+                "Sq": equilibrium_values["Sq"],
+                "Sq_norm": equilibrium_values["Sq_Norm"],
+                "Eq": equilibrium_values["Eq"]
+
+            }
+
+        elif options_tipo_var == "likert":
+            characteristic_values = {
+                "mean": series.mean(),
+                "standard deviation": series.std(),
+                "gini index": str(gini),
                 "mode": datatest[datatest["Frequency"] == datatest["Frequency"].max()]["X"].values[0],
                 "total equilibrium": datatest["Frequency"].sum() / len(datatest["Frequency"].unique()),
                 "Sq": equilibrium_values["Sq"],
@@ -88,6 +122,11 @@ class Output():
         print(options_tipo_var)
         if options_tipo_var == "categoriale" or options_tipo_var == "ordinale":
             chart = altair_monovariate_bar(data=datatest, options_tipo_var=options_tipo_var, lista_ordinale=False)
+            print(chart.to_json())
+        elif options_tipo_var == "likert":
+            chart = altair_monovariate_bar(data=dataset_dist_plot, options_tipo_var=options_tipo_var,
+                                           lista_ordinale=options_categorical_list)
+
             print(chart.to_json())
         elif options_tipo_var == "cardinale":
             print(dataset[g[0]])
@@ -143,6 +182,7 @@ class Output():
                 "Eq": equilibrium_values["Eq"]
 
             }
+        print(options_categorical_list)
         chart = altair_monovariate_bar(data=dataset_dist_plot, options_tipo_var=options_tipo_var,
                                        lista_ordinale=options_categorical_list)
 

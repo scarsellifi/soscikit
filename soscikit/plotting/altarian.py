@@ -50,6 +50,26 @@ def altair_monovariate_bar(data, options_tipo_var, lista_ordinale):
         )
         chart = (bars + text).properties(width=400, height=300).interactive()
 
+    elif lista_ordinale == ["1","2","3","4","5"]:
+        bars = alt.Chart(datatest).mark_bar().encode(
+            x=alt.X('X:N', sort=lista_ordinale),
+            y=alt.Y('Frequency')
+        ).encode(
+            tooltip=['X', 'Frequency']
+        )
+        text = bars.mark_text(
+            align='left',
+            baseline='middle',
+            color="blue",
+            fontSize=20,
+            dx=0,  # Nudges text to right so it doesn't appear on top of the bar
+            dy=-7
+        ).encode(
+            text='Frequency:Q',
+            tooltip=['X', 'Frequency']
+        )
+        chart = (bars + text).properties(width=400, height=300).interactive()
+
     return chart
 
 
