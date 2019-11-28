@@ -74,6 +74,7 @@ def altair_monovariate_bar(data, options_tipo_var, lista_ordinale):
 
 
 def altair_monovariate_hist(data, column):
+    data = data[column].to_frame()
     histogram = alt.Chart(data).mark_bar().properties(width=400, height=300).encode(
         x=alt.X(column + ":Q", bin=True),
         y='count()'
