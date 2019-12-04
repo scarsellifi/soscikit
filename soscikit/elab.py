@@ -22,6 +22,9 @@ import pandas_profiling
 import re
 from io import BytesIO
 import base64
+import socialscience.crosstab as crosstable
+
+
 
 class Output():
     """output operation"""
@@ -334,12 +337,14 @@ class Output():
             index_series = request.form["textarea_script_index"]
             columns_series = request.form["textarea_script_columns"]
             self.script = script
-            self.index_series = index_series
-            self.columns_series = columns_series
+            self.index_series = index_series.split('"')[1].split('"')[0]
+            self.columns_series = columns_series.split('"')[1].split('"')[0]
         except:
             script = self.script
         data = dataset
         result = eval(script, {'data': data, "pd": pd})
+
+
 
 
         '''
@@ -370,19 +375,30 @@ class Output():
             figfile.seek(0)  # rewind to beginning of file
             figdata_png = base64.b64encode(figfile.getvalue())
             plt.figure()
+
+            fig_output = figdata_png.decode('utf8')
+
+            crosstab_informative = crosstable.contingency_table(data, self.index_series, self.columns_series,
+                                                                order_a=False, order_b=False, informative=True,
+                                                                norm_axis=False)
+            crosstab_informative = crosstab_informative.to_html(classes="table table-striped", table_id="corr_tab_2")
         else:
             abilitate_tipology = "disabilitate"
             img_link = ""
+            crosstab_informative = "only for bidimensional table"
+            fig_output = "only for bidimensional table"
 
         self.crosstab_session["ncrosstab_output"] = result.to_html(classes="draggable", table_id="corr_tab")
         self.crosstab_session["ncrosstab_output_margin"] = "pass"
         self.crosstab_session["crosstab_output_descriptive"] = "pass"
 
+
         return render_template("crosstab/crosstab_output.html",
                                table=result.to_html(classes="draggable",
                                                     table_id="corr_tab"),
+                               table_informative = crosstab_informative,
                                abilitate_tipology=abilitate_tipology,
-                               img=figdata_png.decode('utf8'))
+                               img=fig_output)
 
     def ncrosstab_classification(self):
         result = self.crosstab_session["ncrosstab_output"]

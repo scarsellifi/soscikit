@@ -22,7 +22,8 @@ setup(name='SoSciKit',
           "altair",
           "xlrd==1.1.0",
           "jupyter",
-          "openpyxl"
+          "openpyxl",
+          "socialscience"
       ],
       long_description="""
           # SoSciKit
