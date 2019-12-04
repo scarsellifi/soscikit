@@ -369,6 +369,7 @@ class Output():
             plt.savefig(figfile, format="png")
             figfile.seek(0)  # rewind to beginning of file
             figdata_png = base64.b64encode(figfile.getvalue())
+            plt.figure()
         else:
             abilitate_tipology = "disabilitate"
             img_link = ""
