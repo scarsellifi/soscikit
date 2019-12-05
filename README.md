@@ -3,7 +3,7 @@
 <img src="soscikit/static/images/1page.jpg" alt="Logo">
 
 
-SoSciKit is an open source web application (MIT license) that simplifies the process of data analysis - making it accessible to a wider community. Based on Python scientific libraries and Flask, the web application allows people to use a number of statistical libraries written in Python through an intuitive graphical user interface with no prerequisite of being either a programmer or a statistician. At the moment the application allows to perform monovariate, bivariate, cross tabulation and k-mean classification operations. In addition, it allows to recode categorical variables and create typologies.
+SoSciKit is an open source web application (MIT license) that simplifies the process of data analysis - making it accessible to a wider community. Based on Python scientific libraries and Flask, the web application allows people to use a number of statistical libraries written in Python through an intuitive graphical user interface with no prerequisite of being either a programmer or a statistician. At the moment the application allows you to perform monovariate, bivariate, cross tabulation and k-mean classification operations. In addition, it allows you to recode categorical variables and create typologies.
 
 [![Downloads](https://pepy.tech/badge/soscikit)](https://pepy.tech/project/soscikit)
 [![Downloads](https://pepy.tech/badge/soscikit/week)](https://pepy.tech/project/soscikit/week)
@@ -24,7 +24,7 @@ You can start SoScikit by running
 
     python3.x -m soscikit
 
-it's start server and open your browser on localhost http://127.0.0.1:5555/
+it starts an HTTP server and you can access it locally in your browser at http://127.0.0.1:5555/
 
 
 ## How to contribute
