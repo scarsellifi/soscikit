@@ -67,7 +67,7 @@ def main():
     @app.route('/action', methods=['GET', 'POST'])
     def action():
         return obj_elab.action(request)
-## action navbar
+    ## action navbar
     @app.route('/monovariate', methods=['GET', 'POST'])
     def monovariate():
         return render_template("monovariate/monovariate_selection.html",
@@ -185,7 +185,6 @@ def main():
 
     app.run(port=5555, debug=True)
 
-'''
+
 if __name__ == "__main__":
     main()
-'''
